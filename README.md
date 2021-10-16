@@ -1,7 +1,6 @@
 # Morpher
-pull the latest change of submodule(TODO: check whether automatically update):  
-    
-    git submodule update --remote
+clone first:  `git clone --recurse-submodules  https://github.com/ecolab-nus/Morpher.git` \
+pull the latest change of submodule.:  `git submodule update --remote`
 
 ## Build dependencies:
 
