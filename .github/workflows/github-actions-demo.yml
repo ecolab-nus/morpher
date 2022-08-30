@@ -23,5 +23,11 @@ jobs:
           opt -version
       - name: Build Morpher
         run: |
-          bash build_all.sh
+          cd Morpher_DFG_Generator
+          mkdir build
+          cd build
+      - name: "run cmake "
+        run: cmake ..
+      - name: "run make " 
+        run: make
       - run: echo "🍏 This job's status is ${{ job.status }}."
