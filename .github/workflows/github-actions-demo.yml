@@ -24,6 +24,14 @@ jobs:
         run: |
           opt -version
           g++ -v 
+      - name: Install gcc-7 g++-7
+        run: |
+         sudo apt update
+         sudo apt install  gcc-7 g++-7
+         cmake $GITHUB_WORKSPACE -DCMAKE_BUILD_TYPE=$BUILD_TYPE
+        env:
+         CC:   gcc-10
+         CXX:  g++-10
       - name: Build Morpher
         #working-directory: ./Morpher_DFG_Generator
         run: |
