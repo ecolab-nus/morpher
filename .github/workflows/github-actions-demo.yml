@@ -28,9 +28,7 @@ jobs:
       - run:   |
          sudo apt update
          sudo apt install g++-7
-        shell: bash
       - run:   cmake $GITHUB_WORKSPACE -DCMAKE_BUILD_TYPE=$BUILD_TYPE
-        shell: bash
         env:
           CXX:  g++-7
       - name: Build Morpher
