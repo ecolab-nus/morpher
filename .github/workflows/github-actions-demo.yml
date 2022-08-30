@@ -21,8 +21,8 @@ jobs:
        # with:
        #  version: "10.0"
       - name: Check LLVM opt version
-        run: |
-          opt -version
+      #  run: |
+          #opt -version
       - name: Install nlohmann json
         run: |
           git clone https://github.com/nlohmann/json.git
