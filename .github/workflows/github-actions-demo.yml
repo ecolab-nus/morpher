@@ -13,7 +13,7 @@ jobs:
       - run: echo "🖥️ The workflow is now ready to test your code on the runner."
       - name: List files in the repository
         run: |
-          ls ${{ github.workspace }}
+          ls ${{ github.workspace }}/Morpher_DFG_Generator
       - name: Install LLVM and Clang
         uses: KyleMayes/install-llvm-action@v1
         with:
@@ -26,6 +26,6 @@ jobs:
         run: |
           ls
           ls ${{ github.workspace }}/Morpher_DFG_Generator
-          cmake -S . -B build -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release
-          cmake --build build --target all --config Release -- -j4
+          #cmake -S . -B build -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release
+          #cmake --build build --target all --config Release -- -j4
       - run: echo "🍏 This job's status is ${{ job.status }}."
