@@ -37,5 +37,17 @@ https://blog.csdn.net/jiaken2660/article/details/105155257
     make -j2
     sudo make install
 
-## build all the submodules:
+## Build all the submodules:
 bash build_all.sh
+
+## Running example:
+
+1) Activate python3 virtual environment (https://linoxide.com/linux-how-to/setup-python-virtual-environment-ubuntu/)
+2) Specify the target arch, dfg_type, mapping method, memory bank sizes,.. in config/<>.yaml file. (default_config file targets hycube 4x4 architecture)
+3) Run the script:  ``$python run_morpher.py <path to c source code in benchmark folder>  <target function> <configurations(default: config/default_config.yaml)>``. 
+
+Example (running array_add on hycube 4x4): ``$python run_morpher.py morpher_benchmarks/array_add/array_add.c array_add``
+
+
+
+
