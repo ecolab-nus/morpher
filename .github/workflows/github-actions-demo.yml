@@ -15,7 +15,7 @@ jobs:
       - run: echo "🖥️ The workflow is now ready to test your code on the runner."
       - name: List files in the repository
         run: |
-          ls ${{ github.workspace }}/Morpher_DFG_Generator
+          ls ${{ github.workspace }}
       - name: Install LLVM and Clang
         uses: KyleMayes/install-llvm-action@v1
         with:
@@ -23,6 +23,14 @@ jobs:
       - name: Check LLVM opt version
         run: |
           opt -version
+      - name: Install nlohmann json
+        run: |
+          git clone https://github.com/nlohmann/json.git
+          mkdir build
+          cd build
+          cmake ../
+          make -j2
+          make install
       - name: Build Morpher
         #working-directory: ./Morpher_DFG_Generator
         run: |
