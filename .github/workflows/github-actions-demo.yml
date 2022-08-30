@@ -23,15 +23,6 @@ jobs:
       - name: Check LLVM opt version
         run: |
           opt -version
-      - name: Install nlohmann json
-        run: |
-          git clone https://github.com/nlohmann/json.git
-          ls
-          cd json
-          mkdir build
-          cd build
-          cmake ../
-          make -j2
       - name: Build Morpher
         #working-directory: ./Morpher_DFG_Generator
         run: |
