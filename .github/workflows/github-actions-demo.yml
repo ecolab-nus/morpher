@@ -26,6 +26,6 @@ jobs:
         run: |
           mkdir build
           cd build
-          cmake ..
-          make
+          cmake -S . -B build -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release
+          cmake --build build --target all --config Release -- -j4
       - run: echo "🍏 This job's status is ${{ job.status }}."
