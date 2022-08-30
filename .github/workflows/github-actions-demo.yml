@@ -16,6 +16,15 @@ jobs:
       - name: List files in the repository
         run: |
           ls ${{ github.workspace }}
+      - name: Setup Python version
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - name: Create and start virtual environment
+        run: |
+          python3 -m venv venv
+          source venv/bin/activate
+          python run_morpher.py morpher_benchmarks/array_add/array_add.c array_add
       - name: Install LLVM and Clang
         uses: KyleMayes/install-llvm-action@v1
         with:
