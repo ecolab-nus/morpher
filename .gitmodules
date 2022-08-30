@@ -10,7 +10,3 @@
 	path = hycube_simulator
 	url = https://github.com/ecolab-nus/hycube_simulator.git
 	branch = master
-[submodule "Morpher_Scripts"]
-	path = Morpher_Scripts
-	url = https://github.com/ecolab-nus/Morpher_Scripts.git
-	branch = main
