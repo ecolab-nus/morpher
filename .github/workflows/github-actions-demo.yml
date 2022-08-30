@@ -23,7 +23,7 @@ jobs:
       - name: Check LLVM opt version
         run: |
           opt -version
-          #g++ -v 
+          g++ -v 
       - name: Build Morpher
         #working-directory: ./Morpher_DFG_Generator
         run: |
