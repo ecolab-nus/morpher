@@ -17,24 +17,24 @@ jobs:
         run: |
           ls ${{ github.workspace }}
       - name: Install LLVM and Clang
-        uses: KyleMayes/install-llvm-action@v1
-        with:
-         version: "10.0"
+        #uses: KyleMayes/install-llvm-action@v1
+        #with:
+         #version: "10.0"
       - name: Check LLVM opt and g++ version
         run: |
           opt -version
           g++ -v
       - name: Install g++7
-      - run:   |
-         sudo apt update
-         sudo apt install g++-7
-      - run:   cmake $GITHUB_WORKSPACE -DCMAKE_BUILD_TYPE=$BUILD_TYPE
-        env:
-          CXX:  g++-7
+      #- run:   |
+         #sudo apt update
+         #sudo apt install g++-7
+      #- run:   cmake $GITHUB_WORKSPACE -DCMAKE_BUILD_TYPE=$BUILD_TYPE
+        #env:
+          #CXX:  g++-7
       - name: Build Morpher
         #working-directory: ./Morpher_DFG_Generator
         run: |
-          bash build_all.sh
+          #bash build_all.sh
           #ls
           #ls ${{ github.workspace }}/Morpher_DFG_Generator
           #cmake -S . -B build -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release
