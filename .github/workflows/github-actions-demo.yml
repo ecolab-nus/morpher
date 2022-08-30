@@ -20,7 +20,7 @@ jobs:
        # uses: KyleMayes/install-llvm-action@v1
        # with:
        #  version: "10.0"
-      - name: Check LLVM opt version
+      #- name: Check LLVM opt version
       #  run: |
           #opt -version
       - name: Install nlohmann json
@@ -32,10 +32,10 @@ jobs:
           cd build
           cmake ../
           make -j2
-          make install
+          #make install
       - name: Build Morpher
         #working-directory: ./Morpher_DFG_Generator
-        run: |
+        #run: |
           #bash build_all.sh
           #ls
           #ls ${{ github.workspace }}/Morpher_DFG_Generator
