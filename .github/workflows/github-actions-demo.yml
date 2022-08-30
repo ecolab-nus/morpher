@@ -15,7 +15,7 @@ jobs:
         run: |
           ls ${{ github.workspace }}
       - name: Install LLVM and Clang
-        uses: actions/install-llvm-action@v1
+        uses: KyleMayes/install-llvm-action@v1
         with:
          version: "10.0"
       - run: echo "🍏 This job's status is ${{ job.status }}."
