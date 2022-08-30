@@ -24,6 +24,7 @@ jobs:
         run: |
           python3 -m venv venv
           source venv/bin/activate
+          sudo apt-get install gcc-multilib
       - name: Install dependencies
         run: pip install -r python_requirements.txt
       - name: Runall
