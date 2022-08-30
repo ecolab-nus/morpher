@@ -10,6 +10,7 @@ import re
 import numpy as np
 from tqdm import tqdm
 import yaml
+from time import sleep
 ############################################
 # Directory Structure:
 # Morpher Home:
@@ -79,6 +80,7 @@ def main(csource, function, config= "config/default_config.yaml"):
   print('\n Kernel: %s \n C source: %s/benchmarks/%s \n CGRA arch: %s/json_arch/%s \n Config: %s\n Run mode: %s\n'% (kernel, DFG_GEN_HOME,csource, MAPPER_HOME, json_arch, config, runmode))
 
 
+  sleep(2)
 
 ##############################################################################################################################################
   if runmode == 'runall' or runmode == 'dfg_gen_only':
@@ -127,7 +129,7 @@ def main(csource, function, config= "config/default_config.yaml"):
       os.system('cp '+kernel+'_mem_alloc.txt '+MAPPER_KERNEL )
 
     os.system('rm *.ll')
-
+  sleep(2)
 ##############################################################################################################################################
   if runmode == 'runall' or runmode == 'mapper_only':
     print('\n-----Running Morpher_CGRA_Mapper-----\n')
