@@ -24,10 +24,11 @@ jobs:
         run: |
           opt -version
       - name: Build Morpher
-        working-directory: ./Morpher_DFG_Generator
+        #working-directory: ./Morpher_DFG_Generator
         run: |
-          ls
-          ls ${{ github.workspace }}/Morpher_DFG_Generator
+          bash build_all.sh
+          #ls
+          #ls ${{ github.workspace }}/Morpher_DFG_Generator
           #cmake -S . -B build -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release
           #cmake --build build --target all --config Release -- -j4
       - run: echo "🍏 This job's status is ${{ job.status }}."
