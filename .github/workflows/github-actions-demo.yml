@@ -32,7 +32,6 @@ jobs:
           cd build
           cmake ../
           make -j2
-          make install
       - name: Build Morpher
         #working-directory: ./Morpher_DFG_Generator
         run: |
