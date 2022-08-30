@@ -24,8 +24,6 @@ jobs:
       - name: Build Morpher
         working-directory: ./Morpher_DFG_Generator
         run: |
-          mkdir build
-          cd build
           cmake -S . -B build -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release
           cmake --build build --target all --config Release -- -j4
       - run: echo "🍏 This job's status is ${{ job.status }}."
