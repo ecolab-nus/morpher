@@ -21,4 +21,7 @@ jobs:
       - name: Check LLVM opt version
         run: |
           opt -version
+      - name: Build Morpher
+        run: |
+          bash build_all.sh
       - run: echo "🍏 This job's status is ${{ job.status }}."
