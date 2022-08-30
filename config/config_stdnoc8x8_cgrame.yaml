@@ -1,0 +1,12 @@
+---
+ json_arch: "stdnoc8x8.json"
+ json_arch_before_memupdate: 'stdnoc8x8.json'
+ mapper_subfolder: 'arch_stdnoc8x8__dfgtype_cgrame'
+ dfg_type: 'CGRAME'
+ init_II: 0
+ numberofbanks: 2
+ banksize: 16384
+ max_test_samples: 5
+ mapping_method: 1
+ llvm_debug_type: 'no'
+
