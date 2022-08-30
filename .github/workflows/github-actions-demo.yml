@@ -24,7 +24,10 @@ jobs:
         run: |
           python3 -m venv venv
           source venv/bin/activate
-          python run_morpher.py morpher_benchmarks/array_add/array_add.c array_add
+      - name: Install dependencies
+        run: pip install -r python_requirements.txt
+      - name: Runall
+        run: python run_morpher.py morpher_benchmarks/array_add/array_add.c array_add
       - name: Install LLVM and Clang
         uses: KyleMayes/install-llvm-action@v1
         with:
