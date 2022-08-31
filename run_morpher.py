@@ -10,6 +10,7 @@ import re
 import numpy as np
 from tqdm import tqdm
 import yaml
+from time import sleep
 ############################################
 # Directory Structure:
 # Morpher Home:
@@ -79,6 +80,7 @@ def main(csource, function, config= "config/default_config.yaml"):
   print('\n Kernel: %s \n C source: %s/benchmarks/%s \n CGRA arch: %s/json_arch/%s \n Config: %s\n Run mode: %s\n'% (kernel, DFG_GEN_HOME,csource, MAPPER_HOME, json_arch, config, runmode))
 
 
+  
 
 ##############################################################################################################################################
   if runmode == 'runall' or runmode == 'dfg_gen_only':
@@ -98,7 +100,7 @@ def main(csource, function, config= "config/default_config.yaml"):
     os.system('opt -gvn -mem2reg -memdep -memcpyopt -lcssa -loop-simplify -licm -loop-deletion -indvars -simplifycfg -mergereturn -indvars  %s.ll -S -o %s_opt.ll' % (kernel,kernel))
 
     print('Generating DFG (%s_PartPredDFG.xml/dot) and data layout (%s_mem_alloc.txt)..\n' % (kernel,kernel))
-    os.system('opt -load %s/build/src/libdfggenPass.so -fn %s -nobanks %d -banksize %d -type %s --debug-only=%s  -skeleton %s_opt.ll -S -o %s_opt_instrument.ll' % (DFG_GEN_HOME,kernel,numberofbanks,banksize, dfg_type, llvm_debug_type,kernel,kernel))
+    os.system('opt -load %s/build/src/libdfggenPass.so -fn %s -nobanks %d -banksize %d -type %s  -skeleton %s_opt.ll -S -o %s_opt_instrument.ll' % (DFG_GEN_HOME,kernel,numberofbanks,banksize, dfg_type,kernel,kernel))
 
 
     os.system('dot -Tpdf %s_PartPredDFG.dot -o %s_PartPredDFG.pdf' % (kernel,kernel))
@@ -127,7 +129,7 @@ def main(csource, function, config= "config/default_config.yaml"):
       os.system('cp '+kernel+'_mem_alloc.txt '+MAPPER_KERNEL )
 
     os.system('rm *.ll')
-
+  
 ##############################################################################################################################################
   if runmode == 'runall' or runmode == 'mapper_only':
     print('\n-----Running Morpher_CGRA_Mapper-----\n')
@@ -147,7 +149,7 @@ def main(csource, function, config= "config/default_config.yaml"):
     else:
       os.system('%s/build/src/cgra_xml_mapper -d %s_PartPredDFG.xml -x 4 -y 4 -j %s/json_arch/%s -i %d -m %d' % (MAPPER_HOME,kernel,MAPPER_HOME, json_arch, init_II, mapping_method))
   
-    
+  
 
 ##############################################################################################################################################
   # if (runmode == 'runall' or runmode == 'sim_only'):
