@@ -1,4 +1,11 @@
 # Morpher
+
+[![Actions Status](https://github.com/ecolab-nus/morpher/workflows/Build%20and%20Test/badge.svg)](https://github.com/ecolab-nus/morpher/actions)
+
+Morpher is a powerful, integrated compilation and simulation framework for CGRA, that fills this gap
+with a flexible approach enabling easy specification of complex architectural features and automated
+modeling of these features in efficient compiler, simulator.
+
 clone first:  `git clone --recurse-submodules  https://github.com/ecolab-nus/Morpher.git` \
 pull the latest change of submodule.:  `git submodule update --remote`
 
