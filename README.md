@@ -1,4 +1,4 @@
-# Morpher
+# Morpher CGRA Design Framework
 
 [![Actions Status](https://github.com/ecolab-nus/morpher/workflows/Build%20and%20Test/badge.svg)](https://github.com/ecolab-nus/morpher/actions)
 
