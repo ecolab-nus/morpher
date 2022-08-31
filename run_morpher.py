@@ -149,7 +149,7 @@ def main(csource, function, config= "config/default_config.yaml"):
     else:
       os.system('%s/build/src/cgra_xml_mapper -d %s_PartPredDFG.xml -x 4 -y 4 -j %s/json_arch/%s -i %d -m %d' % (MAPPER_HOME,kernel,MAPPER_HOME, json_arch, init_II, mapping_method))
   
-   sleep(10) 
+  sleep(10) 
 
 ##############################################################################################################################################
   # if (runmode == 'runall' or runmode == 'sim_only'):
