@@ -80,7 +80,7 @@ def main(csource, function, config= "config/default_config.yaml"):
   print('\n Kernel: %s \n C source: %s/benchmarks/%s \n CGRA arch: %s/json_arch/%s \n Config: %s\n Run mode: %s\n'% (kernel, DFG_GEN_HOME,csource, MAPPER_HOME, json_arch, config, runmode))
 
 
-  sleep(10)
+  
 
 ##############################################################################################################################################
   if runmode == 'runall' or runmode == 'dfg_gen_only':
@@ -129,7 +129,7 @@ def main(csource, function, config= "config/default_config.yaml"):
       os.system('cp '+kernel+'_mem_alloc.txt '+MAPPER_KERNEL )
 
     os.system('rm *.ll')
-  sleep(10)
+  
 ##############################################################################################################################################
   if runmode == 'runall' or runmode == 'mapper_only':
     print('\n-----Running Morpher_CGRA_Mapper-----\n')
@@ -149,7 +149,7 @@ def main(csource, function, config= "config/default_config.yaml"):
     else:
       os.system('%s/build/src/cgra_xml_mapper -d %s_PartPredDFG.xml -x 4 -y 4 -j %s/json_arch/%s -i %d -m %d' % (MAPPER_HOME,kernel,MAPPER_HOME, json_arch, init_II, mapping_method))
   
-  sleep(10) 
+  
 
 ##############################################################################################################################################
   # if (runmode == 'runall' or runmode == 'sim_only'):
