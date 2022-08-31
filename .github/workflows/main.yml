@@ -39,10 +39,7 @@ jobs:
       - name: Build all
         run: |
           bash build_all.sh
-      - name: Runall
+      - name: Run all
         run: python -u run_morpher.py morpher_benchmarks/array_add/array_add.c array_add
-          #ls
-          #ls ${{ github.workspace }}/Morpher_DFG_Generator
-          #cmake -S . -B build -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release
-          #cmake --build build --target all --config Release -- -j4
+  
       - run: echo "🍏 This job's status is ${{ job.status }}."
