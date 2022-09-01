@@ -1,4 +1,4 @@
-# Morpher CGRA Design Framework
+# Morpher - an end-to-end toolchain for CGRA
 
 [![Actions Status](https://github.com/ecolab-nus/morpher/workflows/Build%20and%20Test/badge.svg)](https://github.com/ecolab-nus/morpher/actions)
 
@@ -6,14 +6,18 @@ Morpher is a powerful, integrated compilation and simulation framework for CGRA,
 with a flexible approach enabling easy specification of complex architectural features and automated
 modeling of these features in efficient compiler, simulator.
 
+
+
+## Getting Started:
+
+Note: Morpher requires LLVM 10.0.0 and g++ version cannot be higher than g++-v7. 
+
+### 1. Pull the code
 clone first:  `git clone --recurse-submodules  https://github.com/ecolab-nus/Morpher.git` \
 pull the latest change of submodule.:  `git submodule update --remote`
 
-## Build dependencies:
 
-This version requires LLVM 10.0.0 and g++ version cannot be higher than g++-v7. 
-
-### LLVM, clang, polly (for DFG Generator):
+### 2. Install LLVM, clang, polly (for DFG Generator):
 
 Read https://llvm.org/docs/GettingStarted.html
 follow https://github.com/llvm/llvm-project
@@ -34,10 +38,10 @@ Important points:
     don't use release type use default debug version (will take about 70GB disk space)
 
 
-## Build all the submodules:
+### 3. Build all the submodules:
     bash build_all.sh
 
-## Test Dependencies:
+### 4. Test Dependencies:
     Activate python3 virtual environment (https://linoxide.com/linux-how-to/setup-python-virtual-environment-ubuntu/)
     pip install -r python_requirements.txt
     sudo apt-get install gcc-multilib g++-multilib
