@@ -1,4 +1,4 @@
-# Morpher - an end-to-end toolchain for CGRA
+# Morpher - An end-to-end Toolchain for CGRA
 
 [![Actions Status](https://github.com/ecolab-nus/morpher/workflows/Build%20and%20Test/badge.svg)](https://github.com/ecolab-nus/morpher/actions)
 
