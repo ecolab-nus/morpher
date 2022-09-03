@@ -1,0 +1,12 @@
+---
+ json_arch: "hycube_original_mem.json"
+ json_arch_before_memupdate: 'hycube_original_updatemem.json'
+ mapper_subfolder: 'hycube'
+ dfg_type: 'PartPred'
+ init_II: 0
+ numberofbanks: 2
+ banksize: 16384
+ max_test_samples: 5
+ mapping_method: 0
+ llvm_debug_type: 'no'
+
