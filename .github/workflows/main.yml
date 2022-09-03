@@ -42,6 +42,6 @@ jobs:
       - name: Run array add
         run: python -u run_morpher.py morpher_benchmarks/array_add/array_add.c array_add
       - name: Run microspeech (with GEMM-F:flattened-only)
-        run: python run_morpher.py woset_benchmarks/microspeech_4/microspeech.c microspeech_conv_layer_hycube config/microspeech_hycube_mm_0.yaml
+        run: python -u run_morpher.py woset_benchmarks/microspeech_4/microspeech.c microspeech_conv_layer_hycube config/microspeech_hycube_mm_0.yaml
 
       - run: echo "🍏 This job's status is ${{ job.status }}."
