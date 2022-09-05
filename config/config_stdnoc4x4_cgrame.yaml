@@ -1,6 +1,6 @@
 ---
- json_arch: "stdnoc.json"
- json_arch_before_memupdate: 'stdnoc.json'
+ json_arch: "stdnoc_allmem.json"
+ json_arch_before_memupdate: 'stdnoc_allmem.json'
  mapper_subfolder: 'arch_stdnoc__dfgtype_cgrame'
  dfg_type: 'CGRAME'
  init_II: 0
