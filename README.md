@@ -23,8 +23,8 @@ Read https://llvm.org/docs/GettingStarted.html
 follow https://github.com/llvm/llvm-project
 
     git clone https://github.com/llvm/llvm-project.git
-    git checkout <correct version> (llvm10.0.0)
     cd llvm-project
+    git checkout llvmorg-10.0.0
     mkdir build
     cd build
     cmake -DLLVM_ENABLE_PROJECTS='polly;clang' -G "Unix Makefiles" ../llvm
@@ -35,7 +35,7 @@ Important points:
 
     make sure to checkout correct version before building
     better to use gold linker instead of ld if you face memory problem while building: https://stackoverflow.com/questions/25197570/llvm-clang-compile-error-with-memory-exhausted
-    don't use release type use default debug version (will take about 70GB disk space)
+    use default debug version (will take about 70GB disk space)
 
 
 ### 3. Build all the submodules:
