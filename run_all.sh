@@ -10,5 +10,4 @@ python run_morpher.py cgrame_microbench/mac/mac.c main
 python run_morpher.py cgrame_microbench/mac2/mac2.c main
 python run_morpher.py cgrame_microbench/conv2/conv2.c main
 python run_morpher.py cgrame_microbench/conv3/conv3.c main
-python run_morpher.py cgrame_microbench/mults1/mults1.c main
 python run_morpher.py cgrame_microbench/mults2/mults2.c main
