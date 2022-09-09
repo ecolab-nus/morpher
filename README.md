@@ -31,18 +31,11 @@ follow https://github.com/llvm/llvm-project
     make -j4
     sudo make install
 
-Important points:
-
-    make sure to checkout correct version before building
-    better to use gold linker instead of ld if you face memory problem while building: https://stackoverflow.com/questions/25197570/llvm-clang-compile-error-with-memory-exhausted
-    use default debug version (will take about 70GB disk space)
-
-
 ### 3. Build all the submodules:
     bash build_all.sh
 
-### 4. Test Dependencies:
-    Activate python3 virtual environment (https://linoxide.com/linux-how-to/setup-python-virtual-environment-ubuntu/)
+### 4. Test Environment Dependencies:
+    Activate python3 virtual environment
     pip install -r python_requirements.txt
     sudo apt-get install gcc-multilib g++-multilib
 
@@ -53,7 +46,7 @@ Important points:
 
 Examples: 
 
-1. Compile and verify simple kernels on hycube 4x4
+1. Compile and verify simple kernels on hycube 4x4:
 
 ``$python -u run_morpher.py morpher_benchmarks/array_add/array_add.c array_add``
 
