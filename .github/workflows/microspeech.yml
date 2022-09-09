@@ -41,4 +41,6 @@ jobs:
           bash build_all.sh
       - name: Run Microspeech with Flattened GEMM (GEMM-F)
         run: python -u run_morpher.py woset_benchmarks/microspeech_4/microspeech.c microspeech_conv_layer_hycube config/microspeech_hycube_mm_0.yaml
+      - name: Run Microspeech with Unrolled & Flattened GEMM (GEMM-U-F)
+        run: python -u run_morpher.py woset_benchmarks/microspeech_3/microspeech.c microspeech_conv_layer_hycube config/microspeech_hycube_mm_0.yaml
       - run: echo "🍏 This job's status is ${{ job.status }}."
