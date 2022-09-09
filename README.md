@@ -51,7 +51,11 @@ Important points:
 1) Specify the target arch, dfg_type, mapping method, memory bank sizes,.. in config/<>.yaml file. (default_config file targets hycube 4x4 architecture)
 2) Run the script:  ``$python run_morpher.py <path to c source code in benchmark folder>  <target function> <configurations(default: config/default_config.yaml)>``. 
 
-Example (running array_add on hycube 4x4): ``$python run_morpher.py morpher_benchmarks/array_add/array_add.c array_add``
+Example (running array_add on hycube 4x4): 
+
+``$python run_morpher.py morpher_benchmarks/array_add/array_add.c array_add``
+
+[![Actions Status](https://github.com/ecolab-nus/morpher/workflows/Run%20Examples/badge.svg)](https://github.com/ecolab-nus/morpher/actions)
 
 
 
