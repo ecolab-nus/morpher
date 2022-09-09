@@ -46,17 +46,24 @@ Important points:
     pip install -r python_requirements.txt
     sudo apt-get install gcc-multilib g++-multilib
 
-## Running example:
+## Compiling kernels:
 
 1) Specify the target arch, dfg_type, mapping method, memory bank sizes,.. in config/<>.yaml file. (default_config file targets hycube 4x4 architecture)
 2) Run the script:  ``$python run_morpher.py <path to c source code in benchmark folder>  <target function> <configurations(default: config/default_config.yaml)>``. 
 
-Example (running array_add on hycube 4x4): 
+Examples: 
 
-``$python run_morpher.py morpher_benchmarks/array_add/array_add.c array_add``
+1. Compile and verify simple kernels on hycube 4x4
+
+``$python -u run_morpher.py morpher_benchmarks/array_add/array_add.c array_add``
+
+Please refer the following workflow for more examples.
 
 [![Actions Status](https://github.com/ecolab-nus/morpher/workflows/Run%20Examples/badge.svg)](https://github.com/ecolab-nus/morpher/actions)
 
+2. Compile and verify kernels from Microspeech Application:
+
+[![Actions Status](https://github.com/ecolab-nus/morpher/workflows/Run%20Microspeech/badge.svg)](https://github.com/ecolab-nus/morpher/actions)
 
 
 
