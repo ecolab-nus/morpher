@@ -1,5 +1,5 @@
 name: Run Examples
-on: [push]
+on: [workflow_dispatch]
 jobs:
   Run-Examples:
     runs-on: ubuntu-18.04
