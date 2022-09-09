@@ -1,7 +1,7 @@
 name: Run Examples
 on: [push]
 jobs:
-  Explore-GitHub-Actions:
+  Run-Examples:
     runs-on: ubuntu-18.04
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
