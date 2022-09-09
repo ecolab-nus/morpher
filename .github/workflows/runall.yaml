@@ -1,0 +1,45 @@
+name: Run Examples
+on: [push]
+jobs:
+  Explore-GitHub-Actions:
+    runs-on: ubuntu-18.04
+    steps:
+      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+      - name: Check out repository code
+        uses: actions/checkout@v3
+        with:
+          submodules: recursive
+      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
+      - name: List files in the repository
+        run: |
+          ls ${{ github.workspace }}
+      - name: Install LLVM and Clang
+        uses: KyleMayes/install-llvm-action@v1
+        with:
+         version: "10.0"
+      - name: Check LLVM opt and g++ version
+        run: |
+          opt -version
+          g++ -v 
+      - name: Setup Python version
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - name: Create and start virtual environment
+        run: |
+          python3 -m venv venv
+          source venv/bin/activate
+      - name: Install dependencies
+        run: | 
+         pip install -r python_requirements.txt
+         sudo apt-get install gcc-multilib g++-multilib
+      - name: Build all
+        run: |
+          bash build_all.sh
+      - name: Run all
+        run: |
+          bash run_all.sh
+      - run: echo "🍏 This job's status is ${{ job.status }}."
