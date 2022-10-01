@@ -1,4 +1,4 @@
-# Morpher - An end-to-end Toolchain for CGRA
+# Morpher - Integrated Compilation and Simulation Framework for CGRA
 
 [![Actions Status](https://github.com/ecolab-nus/morpher/workflows/Build%20and%20Test/badge.svg)](https://github.com/ecolab-nus/morpher/actions)
 
@@ -58,5 +58,17 @@ Please refer the following workflow for more examples.
 
 [![Actions Status](https://github.com/ecolab-nus/morpher/workflows/Run%20Microspeech/badge.svg)](https://github.com/ecolab-nus/morpher/actions)
 
+
+# Publications
+
+To appear in Workshop on Open-Source EDA Technology co-sponsored by ICCAD 2022
+
+        @article{morpher-woset2022,
+            title   = "{Morpher: An Open-Source Integrated Compilation and Simulation Framework for CGRA}",
+            author  = {Dhananjaya Wijerathne, Zhaoying Li, Manupa Karunaratne, Li-Shiuan Peh, Tulika Mitra},
+            journal = {Fifth Workshop on Open-Source EDA Technology (WOSET)},
+            month   = {November},
+            year    = {2022},
+        } 
 
 
