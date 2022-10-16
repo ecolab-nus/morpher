@@ -61,7 +61,8 @@ Please refer the following workflow for more examples.
 
 # Publications
 
-To appear in Workshop on Open-Source EDA Technology co-sponsored by ICCAD 2022
+[Morpher: An Open-Source Integrated Compilation and Simulation Framework for CGRA](https://www.comp.nus.edu.sg/~tulika/WOSET_MORPHER_2022.pdf)
+(to appear in Workshop on Open-Source EDA Technology co-sponsored by ICCAD 2022)
 
         @article{morpher-woset2022,
             title   = "{Morpher: An Open-Source Integrated Compilation and Simulation Framework for CGRA}",
