@@ -1,4 +1,5 @@
-# Morpher - Integrated Compilation and Simulation Framework for CGRA
+# Morpher: An Open-Source Tool for CGRA Spatial Accelerators  
+Architecture-Adaptive Compiler, Simulator, and Verifier
 
 [![Actions Status](https://github.com/ecolab-nus/morpher/workflows/Build%20and%20Test/badge.svg)](https://github.com/ecolab-nus/morpher/actions)
 
