@@ -1,4 +1,4 @@
-# Morpher: An Open-Source Tool for CGRA Spatial Accelerators  
+# Morpher: An Open-Source Tool for CGRA Spatial Accelerators 
 Architecture-Adaptive Compiler, Simulator, and Verifier
 
 [![Actions Status](https://github.com/ecolab-nus/morpher/workflows/Build%20and%20Test/badge.svg)](https://github.com/ecolab-nus/morpher/actions)
@@ -62,7 +62,7 @@ Please refer the following workflow for more examples.
 
 # Publications
 
-[Morpher: An Open-Source Integrated Compilation and Simulation Framework for CGRA](https://www.comp.nus.edu.sg/~tulika/WOSET_MORPHER_2022.pdf)
+[WOSET] [Morpher: An Open-Source Integrated Compilation and Simulation Framework for CGRA](https://www.comp.nus.edu.sg/~tulika/WOSET_MORPHER_2022.pdf)\
 (to appear in Workshop on Open-Source EDA Technology co-sponsored by ICCAD 2022)
 
         @article{morpher-woset2022,
@@ -72,5 +72,66 @@ Please refer the following workflow for more examples.
             month   = {November},
             year    = {2022},
         } 
+        
+[DAC] [PANORAMA: Divide-and-Conquer Approach for Mapping Complex Loop Kernels on CGRA](https://www.comp.nus.edu.sg/~tulika/DAC22.pdf)\
+Dhananjaya Wijerathne, Zhaoying Li, Thilini Kaushalya Bandara, Tulika Mitra\
+59th ACM/IEEE Design Automation Conference, 2022 __Publicity Paper__\
+[Artifact Link](https://github.com/ecolab-nus/panorama)
+
+[HPCA] [LISA: Graph Neural Network based Portable Mapping on Spatial Accelerators](https://www.comp.nus.edu.sg/~tulika/HPCA_LISA_2022.pdf)\
+Zhaoying Li, Dan Wu, Dhananjaya Wijerathne, Tulika Mitra\
+28th IEEE International Symposium on High-Performance Computer Architecture, 2022\
+[Artifact Link](https://github.com/ecolab-nus/lisa) __Distinguished Artifact Award__
+
+[ASPLOS] [REVAMP: A Systematic Framework for Heterogeneous CGRA Realization](https://www.comp.nus.edu.sg/~tulika/asplos22.pdf)\
+Thilini Kaushalya Bandara, Dhananjaya Wijerathne, Tulika Mitra, Li-Shiuan Peh\
+27th ACM International Conference on Architectural Support for Programming Languages and Operating Systems, 2022\
+[Artifact Link](https://zenodo.org/record/5848404#.YgyrPTFByUk)
+
+[TCAD] [HiMap: Fast and Scalable High-Quality Mapping on CGRA via Hierarchical Abstraction](https://www.comp.nus.edu.sg/~tulika/HiMap-TCAD.pdf)\
+Dhananjaya Wijerathne, Zhaoying Li, Anuj Pathania, Tulika Mitra, Lothar Thiele\
+IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems, 41(10) 2022
+
+[TCAD] [ChordMap: Automated Mapping of Streaming Applications onto CGRA](https://ieeexplore.ieee.org/document/9351547)\
+Zhaoying Li, Dhananjaya Wijerathne, Xianzhang Chen, Anuj Pathania, Tulika Mitra\
+IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems, 41(2) 2022
+
+[Book Chapter] [Coarse-Grained Reconfigurable Array (CGRA)](https://www.comp.nus.edu.sg/~tulika/CGRA-Survey.pdf)\
+Zhaoying Li, Dhananjaya Wĳerathne, Tulika Mitra\
+Book chapter in “Handbook of Computer Architecture”, Springer (Invited)
+
+[DATE] [HiMap: Fast and Scalable High-Quality Mapping on CGRA via Hierarchical Abstraction](https://www.comp.nus.edu.sg/~tulika/HiMap_DATE_2021.pdf)\
+Dhananjaya Wijerathne, Zhaoying Li, Anuj Pathania, Tulika Mitra, Lothar Thiele\
+Design Automation and Test in Europe 2021
+
+[TECS] [CASCADE: High Throughput Data Streaming via Decoupled Access/Execute CGRA](https://www.comp.nus.edu.sg/~tulika/TECS-CASCADE19.pdf)\
+Dhananjaya Wijerathne, Zhaoying Li, Manupa Karunaratne, Anuj Pathania, Tulika Mitra\
+ACM Transactions on Embedded Computing Systems\
+Special Issue on ACM/IEEE International Conference on Compilers, Architecture, and Synthesis for Embedded Systems 2019
+
+[ICCAD] [4D-CGRA : Introducing the branch dimension to spatio-temporal application mapping of CGRAs](https://www.comp.nus.edu.sg/~tulika/4D-CGRA-ICCAD19.pdf)\
+Manupa Karunaratne, Dhananjaya Wijerathne, Tulika Mitra, Li-Shiuan Peh\
+38th ACM/IEEE International Conference on Computer Aided Design, November 2019
+
+[A-SSCC] [HyCUBE: a 0.9V 26.4 MOPS/mW, 290 pJ/cycle, Power Efficient Accelerator for IoT Applications](https://www.comp.nus.edu.sg/~tulika/Hycube_for_ASSCC_2019.pdf)\
+Bo Wang, Manupa Karunarathne, Aditi Kulkarni, Tulika Mitra, Li-Shiuan Peh\
+IEEE Asian Solid-State Circuits Conference, November 2019
+
+[DAC] [DNestMap : Mapping Deeply-Nested Loops on Ultra-Low Power CGRAs](https://www.comp.nus.edu.sg/~tulika/DAC18-CGRA.pdf)\
+Manupa Karunaratne, Cheng Tan, Aditi Kulkarni, Tulika Mitra, Li-Shiuan Peh\
+55th ACM/IEEE Design Automation Conference, June 2018
+
+[DAC] [HyCUBE : A CGRA with Reconfigurable Single-cycle Multi-hop Interconnect](https://www.comp.nus.edu.sg/~tulika/DAC17.pdf)\
+Manupa Karunaratne, Aditi Kulkarni, Tulika Mitra, Li-Shiuan Peh\
+54th ACM/IEEE Design Automation Conference, June 2017
+
+[ACM-TRETS] [Graph Minor Approach for Application Mapping on CGRAs](https://www.comp.nus.edu.sg/~tulika/TRETS14.pdf)\
+Liang Chen, Tulika Mitra\
+ACM Transactions on Reconfigurable Technology and Systems 2014
+
+[FPT] Graph Minor Approach for Application Mapping on CGRAs [Much expanded journal version](https://www.comp.nus.edu.sg/~tulika/TRETS14.pdf)\
+Liang Chen, Tulika Mitra\
+International Conference on Field Programmable Technology, December 2012\
+__Best Paper Award__
 
 
