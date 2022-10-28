@@ -1,3 +1,6 @@
+![morpher_frontimage](https://user-images.githubusercontent.com/12274945/198690684-f10da308-b6fa-4a42-a24c-7147af9381e6.png)
+
+
 # Morpher: An Open-Source Tool for CGRA Spatial Accelerators 
 Architecture-Adaptive Compiler, Simulator, and Verifier
 
