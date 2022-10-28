@@ -2,13 +2,13 @@
 
 
 # Morpher: An Open-Source Tool for CGRA Spatial Accelerators 
-Architecture-Adaptive Compiler, Simulator, and Verifier
 
 [![Actions Status](https://github.com/ecolab-nus/morpher/workflows/Build%20and%20Test/badge.svg)](https://github.com/ecolab-nus/morpher/actions)
 
-Morpher is a powerful, integrated compilation and simulation framework for CGRA, that fills this gap
-with a flexible approach enabling easy specification of complex architectural features and automated
-modeling of these features in efficient compiler, simulator.
+Morpher is a powerful, integrated compilation and simulation framework, that can assist design space exploration and application-level developments of CGRA based systems. Morpher can take an application with a compute intensive kernel as input, compile the kernel onto a user-provided CGRA architecture, and automatically validate the compiled kernels through cycle-accurate simulation using test data extracted from the application. Morpher can handle real-world application kernels without being limited to simple toy kernels through its feature-rich compiler. Morpher architecture description language
+lets users easily specify architectural features such as complex interconnects, multi-hop routing, and memory organizations. In the experimental study, we evaluate Morpher against the state of-the-art and demonstrate Morpher’s ability to provide end-to end compilation, simulation, and validation.
+
+![framework](https://user-images.githubusercontent.com/12274945/198694251-ab21d639-8999-424a-bc5a-3e7921c638a0.png)
 
 
 
