@@ -1,5 +1,4 @@
-![morpher_frontimage](https://user-images.githubusercontent.com/12274945/198690684-f10da308-b6fa-4a42-a24c-7147af9381e6.png)
-
+![morpher_cover](https://user-images.githubusercontent.com/12274945/198826891-7db8681b-2041-4f3e-93b3-899309b1f8f5.png)
 
 # Morpher: An Open-Source Tool for CGRA Spatial Accelerators 
 
@@ -10,6 +9,11 @@ lets users easily specify architectural features such as complex interconnects, 
 
 ![framework](https://user-images.githubusercontent.com/12274945/198694251-ab21d639-8999-424a-bc5a-3e7921c638a0.png)
 
+Watch the presentations for more information:
+![long](https://woset-workshop.github.io/Videos/2022/12-Wijerathne-long.mp4)
+![short](https://woset-workshop.github.io/Videos/2022/12-Wijerathne-short.mp4)
+
+![ezgif com-gif-maker(2)](https://user-images.githubusercontent.com/12274945/198826823-5230947d-86eb-4493-a6fc-5f43d61ab2b4.gif)
 
 
 ## Getting Started:
