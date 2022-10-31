@@ -1,6 +1,7 @@
-![morpher_cover](https://user-images.githubusercontent.com/12274945/198826891-7db8681b-2041-4f3e-93b3-899309b1f8f5.png)
+![morpher_cover](https://user-images.githubusercontent.com/12274945/198942850-23278b4c-c8a3-4166-9275-457fa8922b69.jpg)
 
-# Morpher: An Open-Source Tool for CGRA Spatial Accelerators 
+
+# Morpher: An Open-Source Tool for CGRA Accelerators 
 
 [![Actions Status](https://github.com/ecolab-nus/morpher/workflows/Build%20and%20Test/badge.svg)](https://github.com/ecolab-nus/morpher/actions)
 
@@ -22,7 +23,7 @@ Note: Morpher requires LLVM 10.0.0 and g++ version cannot be higher than g++-v7.
 
 ### 1. Pull the code
 clone first:  `git clone --recurse-submodules  https://github.com/ecolab-nus/Morpher.git` \
-pull the latest change of submodule.:  `git submodule update --remote`
+pull the latest changes of submodules.:  `git submodule update --remote`
 
 
 ### 2. Install LLVM, clang, polly (for DFG Generator):
