@@ -9,10 +9,10 @@ lets users easily specify architectural features such as complex interconnects, 
 
 ![framework](https://user-images.githubusercontent.com/12274945/198694251-ab21d639-8999-424a-bc5a-3e7921c638a0.png)
 
-Watch the presentations for more information:
-![long](https://woset-workshop.github.io/Videos/2022/12-Wijerathne-long.mp4)
-![short](https://woset-workshop.github.io/Videos/2022/12-Wijerathne-short.mp4)
-
+More information:
+    [WOSET 2022 Presentation](https://woset-workshop.github.io/Videos/2022/12-Wijerathne-long.mp4) (Artifact demonstration from 13.25), 
+    [WOSET 2022 paper](https://woset-workshop.github.io/PDFs/2022/12-Wijerathne-paper.pdf)
+    
 ![ezgif com-gif-maker(2)](https://user-images.githubusercontent.com/12274945/198826823-5230947d-86eb-4493-a6fc-5f43d61ab2b4.gif)
 
 
