@@ -1,5 +1,4 @@
-![morpher_cover](https://user-images.githubusercontent.com/12274945/198942850-23278b4c-c8a3-4166-9275-457fa8922b69.jpg)
-
+![morpher_cover](https://user-images.githubusercontent.com/12274945/198943201-17e9ff67-62b3-445f-bd04-feac08da1601.png)
 
 # Morpher: An Open-Source Tool for CGRA Accelerators 
 
