@@ -1,4 +1,5 @@
 python -u run_morpher.py morpher_benchmarks/array_add/array_add.c array_add
+python -u run_morpher.py morpher_benchmarks/array_cond/array_cond.c array_cond
 python -u run_morpher.py morpher_benchmarks/hpcg/hpcg.c hpcg
 python -u run_morpher.py morpher_benchmarks/trmm/trmm.c trmm
 python -u run_morpher.py pace_benchmarks/gemm/gemm_no_unroll_flattened/gemm.c gemm
