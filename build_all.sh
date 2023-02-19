@@ -2,7 +2,7 @@ cd Morpher_DFG_Generator
 mkdir build
 cd build
 cmake ..
-make  -j 2
+make all -j 2
 cd ../../Morpher_CGRA_Mapper
 mkdir build
 cd build
