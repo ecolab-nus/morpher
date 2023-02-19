@@ -22,12 +22,13 @@ You can build morpher on your Linux machine, or user docker on MAC/Linux.
 Note: Morpher requires LLVM 10.0.0 and g++ version cannot be higher than g++-v7. 
 
 ### build with docker
-* Download the [docker file](https://github.com/ecolab-nus/morpher/blob/main/Dockerfile). Create an empty folder and put the docker into the folder.
-* Build ``morpher`` image: ``$ docker build ./ -t morpher``. This takes around 15 minutes.
+* Download the [docker file](https://github.com/ecolab-nus/morpher/blob/main/Dockerfile) into an empty folder.
+* Go to the folder and Build ``morpher`` image: ``$ docker build ./ -t morpher``. This takes around 15 minutes.
 * Initalize: ``$ docker run --name morpher_tutorial -it morpher``
 * Start the container: ``$ docker start morpher_tutorial``
 * Get into the container: ``docker exec -it morpher_tutorial /bin/bash``
 * run ``cd /home/hpca/tutorial`` and build all the submodules ``bash build_all.s``.
+* You should be able to run this command ``python -u run_morpher.py morpher_benchmarks/array_add/array_add.c array_add`` and see "Simulation test passed!!!".
  
 
 ### build on your machine
