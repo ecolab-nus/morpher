@@ -17,15 +17,26 @@ More information:
 
 
 ## Getting Started:
+You can build morpher on your Linux machine, or user docker on MAC/Linux.
 
 Note: Morpher requires LLVM 10.0.0 and g++ version cannot be higher than g++-v7. 
 
-### 1. Pull the code
+### build with docker
+* Download the [docker file](https://github.com/ecolab-nus/morpher/blob/main/Dockerfile). Create an empty folder and put the docker into the folder.
+* Build ``morpher`` image: ``$ docker build ./ -t morpher``. This takes around 15 minutes.
+* Initalize: ``$ docker run --name morpher_tutorial -it morpher``
+* Start the container: ``$ docker start morpher_tutorial``
+* Get into the container: ``docker exec -it morpher_tutorial /bin/bash``
+* run ``cd /home/hpca/tutorial`` and build all the submodules ``bash build_all.s``.
+ 
+
+### build on your machine
+* Pull the code
 clone first:  `git clone --recurse-submodules  https://github.com/ecolab-nus/Morpher.git` \
 pull the latest changes of submodules.:  `git submodule update --remote`
 
 
-### 2. Install LLVM, clang, polly (for DFG Generator):
+* Install LLVM, clang, polly (for DFG Generator):
 
 Read https://llvm.org/docs/GettingStarted.html
 follow https://github.com/llvm/llvm-project
@@ -39,10 +50,9 @@ follow https://github.com/llvm/llvm-project
     make -j4
     sudo make install
 
-### 3. Build all the submodules:
+* Build all the submodules:
     bash build_all.sh
-
-### 4. Test Environment Dependencies:
+* Test Environment Dependencies:
     Activate python3 virtual environment
     pip install -r python_requirements.txt
     sudo apt-get install gcc-multilib g++-multilib
