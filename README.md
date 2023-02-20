@@ -30,7 +30,8 @@ Note: Morpher requires LLVM 10.0.0 and g++ version cannot be higher than g++-v7.
 * Get into the container: ``docker exec -it morpher_tutorial /bin/bash``
 * Run ``cd /home/hpca/tutorial`` and build all the submodules ``bash build_all.sh``. This takes a few minutes.
 * You should be able to run this command ``python -u run_morpher.py morpher_benchmarks/array_add/array_add.c array_add`` and see "Simulation test passed!!!". This takes a few minutes.
- 
+<br/><br/>
+<br/><br/>
 
 ### build on your machine
 * Pull the code
