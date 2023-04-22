@@ -36,6 +36,8 @@ jobs:
         run: | 
          pip install -r python_requirements.txt
          sudo apt-get install gcc-multilib g++-multilib
+         sudo apt install build-essential 
+         sudo apt -y install g++-7 
       - name: Build all
         run: |
           bash build_all.sh
