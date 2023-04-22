@@ -2,7 +2,7 @@ name: Run Microspeech
 on: [workflow_dispatch]
 jobs:
   Run-Microspeech:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
@@ -36,6 +36,8 @@ jobs:
         run: | 
          pip install -r python_requirements.txt
          sudo apt-get install gcc-multilib g++-multilib
+         sudo apt install build-essential 
+         sudo apt -y install g++-7 
       - name: Build all
         run: |
           bash build_all.sh
