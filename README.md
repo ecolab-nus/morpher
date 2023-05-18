@@ -38,7 +38,7 @@ Note: Morpher requires LLVM 10.0.0 and g++ version cannot be higher than g++-v7.
 ### build on your machine
 * Pull the code
 clone first:  `git clone --recurse-submodules  https://github.com/ecolab-nus/Morpher.git` \
-pull the latest changes of submodules.:  `git submodule update --remote`
+pull the latest changes of submodules.:  `git submodule update --init --remote`
 
 
 * Install LLVM, clang, polly (for DFG Generator):
