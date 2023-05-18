@@ -56,11 +56,11 @@ follow https://github.com/llvm/llvm-project
     sudo make install
 
 * Build all the submodules:
-    bash build_all.sh
-* Test Environment Dependencies:
-    Activate python3 virtual environment
-    pip install -r python_requirements.txt
-    sudo apt-get install gcc-multilib g++-multilib
+    `bash build_all.sh`
+* Test Environment Dependencies:\
+    Activate python3 virtual environment\
+    `pip install -r python_requirements.txt`\
+    `sudo apt-get install gcc-multilib g++-multilib`
 
 ## Compiling kernels:
 
