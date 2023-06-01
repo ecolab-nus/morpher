@@ -72,11 +72,20 @@ def main():
   print('\nupdate memory allocation done!\n')
 
   os.system('../../../build/src/cgra_xml_mapper -d microspeech_conv_layer_hycube_PartPredDFG.xml -x 4 -y 4 -j hycube_original_mem.json -i 10 -t HyCUBE_4REG')
-  os.system('mv *.bin binary/left.bin')
+  for file in os.listdir("./"):
+    if file.endswith(".bin"):
+        II_left=int(file.split('II=')[-1].split(' ')[0].split('_MTP')[0].split(' ')[0])+1
+    os.system('mv *.bin binary/left.bin')
   os.system('../../../build/src/cgra_xml_mapper -d microspeech_conv_layer_hycube_PartPredDFG.xml -x 4 -y 4 -j hycube_original_mem_RC.json -i 10 -t HyCUBE_4REG')
+  for file in os.listdir("./"):
+    if file.endswith(".bin"):
+        II_right=int(file.split('II=')[-1].split(' ')[0].split('_MTP')[0].split(' ')[0])+1
   os.system('mv *.bin binary/right.bin')
-  os.chdir(SIMULATOR_KERNEL)
-  os.system('rm *.bin')  
+  if II_left != II_right:
+    sys.exit('Left and right II does not match!!')
+    
+ # os.chdir(SIMULATOR_KERNEL)
+ # os.system('rm *.bin')  
 
   os.chdir(MAPPER_KERNEL)
   os.system('cp binary/*.bin '+ SIMULATOR_KERNEL)
@@ -85,7 +94,7 @@ def main():
   print('\nRunning hycube_simulator\n')
   os.chdir(SIMULATOR_KERNEL)
   # list = os.listdir('memtraces')
-  num_memory_traces = 3#len(list) //comment it for whole invocation
+  num_memory_traces = 4#len(list) //comment it for whole invocation
   
   os.system('mv microspeech_conv_layer_hycube_mem_alloc.txt mem_alloc.txt')
   os.system('python3 ../../../scripts/duplicate_config.py > dup.log')
@@ -101,11 +110,12 @@ def main():
 
   # invocation = min(invocation,10)
   print("invocation number: ",invocation)
+  os.system('mkdir dataDump')
   if invocation > 0 :
    for i in range(0,invocation) :
     os.system('../../../src/build/hycube_simulator duplicated_config.bin data_modi_' + str(i*4) +'.txt mem_alloc.txt 8 8 16384 data_modi_' + str((i*4 + 1)) + '.txt data_modi_' + str((i*4 + 2)) + '.txt data_modi_' + str((i*4 + 3)) +'.txt | tail -n 2 |head -n 1 > output.log')
     out_file = 'dumped_raw_data_i' + str(i)
-    os.system('cp dumped_raw_data.txt '+ out_file + '.txt')
+    os.system('cp dumped_raw_data.txt dataDump/'+ out_file + '.txt')
     with open("output.log", 'r') as f:
       line = f.readline()
       success = False
@@ -119,13 +129,22 @@ def main():
         print("SUCCEED AT MEMTRACE "+ str(i))
 
   if half_invocations == 1 :
-    os.system('../../../src/build/hycube_simulator duplicated_config.bin data_modi_' + str((invocation*4)) +'.txt mem_alloc.txt 8 8 16384 | tail -n 2 |head -n 1 > output.log  > output.log')
+    os.system('../../../src/build/hycube_simulator duplicated_config.bin data_modi_' + str((invocation*4)) +'.txt mem_alloc.txt 8 8 16384 | tail -n 2 |head -n 1 > output.log')
+    out_file = 'dumped_raw_data_i' + str(invocation)
+    os.system('cp dumped_raw_data.txt dataDump/'+ out_file + '.txt')
+
   
   if half_invocations == 2 :
-    os.system('../../../src/build/hycube_simulator duplicated_config.bin data_modi_' + str((invocation*4)) +'.txt mem_alloc.txt 8 8 16384 data_modi_'  + str((invocation*4 + 1)) +'.txt | tail -n 2 |head -n 1 > output.log  > output.log')
+    os.system('../../../src/build/hycube_simulator duplicated_config.bin data_modi_' + str((invocation*4)) +'.txt mem_alloc.txt 8 8 16384 data_modi_'  + str((invocation*4 + 1)) +'.txt | tail -n 2 |head -n 1 > output.log')
+    out_file = 'dumped_raw_data_i' + str(invocation)
+    os.system('cp dumped_raw_data.txt dataDump/'+ out_file + '.txt')
+
 
   if half_invocations == 3 :
-    os.system('../../../src/build/hycube_simulator duplicated_config.bin data_modi_' + str((invocation*4)) +'.txt mem_alloc.txt 8 8 16384 data_modi_'  + str((invocation*4 + 1))  + '.txt data_modi_' + str((invocation*4 + 2)) +'.txt | tail -n 2 |head -n 1 > output.log > output.log')
+    os.system('../../../src/build/hycube_simulator duplicated_config.bin data_modi_' + str((invocation*4)) +'.txt mem_alloc.txt 8 8 16384 data_modi_'  + str((invocation*4 + 1))  + '.txt data_modi_' + str((invocation*4 + 2)) +'.txt | tail -n 2 |head -n 1 > output.log')
+    out_file = 'dumped_raw_data_i' + str(invocation)
+    os.system('cp dumped_raw_data.txt dataDump/'+ out_file + '.txt')
+
 
   with open("output.log", 'r') as f:
     line = f.readline()
@@ -141,7 +160,23 @@ def main():
 
 	
   print('\nSimulation done! -> invocations = %d , half invocations = %d ,memory traces=%d\n' % (invocation,half_invocations,num_memory_traces))
-  
+
+##############################################################################################################################################
+###############                                                  DUMP TRACE                                                    ###############
+##############################################################################################################################################
+  os.system('mkdir traces')
+  os.system('mkdir mem_files')
+  for filename in os.listdir('dataDump'):
+      if filename == 'dumped_raw_data_i0.txt':
+        os.system('python3 ../../../scripts/automate_new_skipdata.py --cubeins duplicated_config.bin --cubedata '+filename+' --cubetime '+str(II_left)+' --cubeclus 4') #cluster no is fixed
+      else:
+        os.system('python3 ../../../scripts/automate_new_skipdata_no_config.py --cubeins duplicated_config.bin --cubedata '+filename+' --cubetime '+str(II_left)+' --cubeclus 4') #cluster no is fixed
+
+  os.system('mv *.trc traces/')
+
+
+
+
 def my_mkdir(dir):
     try:
         os.makedirs(dir)  
