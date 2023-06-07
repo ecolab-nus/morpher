@@ -7,6 +7,8 @@ import re
 import numpy as np
 from tqdm import tqdm
 
+import scripts.bin_to_trace as BT
+
 ############################################
 # Directory Structure:
 # Morpher Home:
@@ -161,19 +163,22 @@ def main():
 	
   print('\nSimulation done! -> invocations = %d , half invocations = %d ,memory traces=%d\n' % (invocation,half_invocations,num_memory_traces))
 
-##############################################################################################################################################
-###############                                                  DUMP TRACE                                                    ###############
-##############################################################################################################################################
+#############################################################################################################################################
+##############                                                  DUMP TRACE                                                    ###############
+#############################################################################################################################################
+  os.chdir(SIMULATOR_KERNEL)
+  II_left= 11
   os.system('mkdir traces')
   os.system('mkdir mem_files')
   for filename in os.listdir('dataDump'):
       if filename == 'dumped_raw_data_i0.txt':
-        os.system('python3 ../../../scripts/automate_new_skipdata.py --cubeins duplicated_config.bin --cubedata '+filename+' --cubetime '+str(II_left)+' --cubeclus 4') #cluster no is fixed
+        BT.dump_trace_full("duplicated_config.bin",filename,II_left,4,"microspeech")
+        #os.system('python3 ../../../scripts/automate_new_skipdata.py --cubeins duplicated_config.bin --cubedata '+filename+' --cubetime '+str(II_left)+' --cubeclus 4') #cluster no is fixed
       else:
-        os.system('python3 ../../../scripts/automate_new_skipdata_no_config.py --cubeins duplicated_config.bin --cubedata '+filename+' --cubetime '+str(II_left)+' --cubeclus 4') #cluster no is fixed
+        BT.dump_trace_no_cmem(filename,II_left,4)
+        #os.system('python3 ../../../scripts/automate_new_skipdata_no_config.py --cubeins duplicated_config.bin --cubedata '+filename+' --cubetime '+str(II_left)+' --cubeclus 4') #cluster no is fixed
 
-  os.system('mv *.trc traces/')
-
+  os.system('mv *.trc *.h traces/')
 
 
 
