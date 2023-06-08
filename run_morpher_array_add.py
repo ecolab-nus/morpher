@@ -29,9 +29,9 @@ def main():
   MAPPER_HOME = MORPHER_HOME + '/Morpher_CGRA_Mapper'
   SIMULATOR_HOME = MORPHER_HOME + '/hycube_simulator'
 
-  DFG_GEN_KERNEL = DFG_GEN_HOME + '/benchmarks/pace_chip_experiments/microspeech/' 
-  MAPPER_KERNEL = MAPPER_HOME + '/applications/hycube8x8//Microspeech16/'
-  SIMULATOR_KERNEL =SIMULATOR_HOME + '/applications/hycube8x8/Microspeech16/'
+  DFG_GEN_KERNEL = DFG_GEN_HOME + '/benchmarks/pace_chip_experiments/array_add/' 
+  MAPPER_KERNEL = MAPPER_HOME + '/applications/hycube8x8/array_add/'
+  SIMULATOR_KERNEL =SIMULATOR_HOME + '/applications/hycube8x8/array_add/'
 
   my_mkdir(DFG_GEN_KERNEL)
   my_mkdir(MAPPER_KERNEL)
@@ -44,8 +44,8 @@ def main():
   os.chdir(DFG_GEN_KERNEL)
 
   print('\nGenerating DFG\n')
-  os.system('./run_pass.sh microspeech_conv_layer_hycube 2 8192')
-  os.system('dot -Tpdf microspeech_conv_layer_hycube_PartPredDFG.dot -o microspeech_conv_layer_hycube_PartPredDFG.pdf')
+  os.system('./run_pass.sh array_add 2 8192')
+  os.system('dot -Tpdf array_add_PartPredDFG.dot -o array_add_PartPredDFG.pdf')
 
   MEM_TRACE = DFG_GEN_KERNEL + '/memtraces'
 
@@ -59,9 +59,9 @@ def main():
   print("num_memory_traces number: ",num_memory_traces)
  # os.system('cp memtraces/loop_microspeech_conv_layer_hycube_INNERMOST_LN13_0.txt '+SIMULATOR_KERNEL)
   os.system('cp -r memtraces/ '+SIMULATOR_KERNEL)
-  os.system('cp microspeech_conv_layer_hycube_mem_alloc.txt '+SIMULATOR_KERNEL)
-  os.system('cp microspeech_conv_layer_hycube_mem_alloc.txt '+MAPPER_KERNEL)
-  os.system('cp microspeech_conv_layer_hycube_PartPredDFG.xml '+ MAPPER_KERNEL)
+  os.system('cp array_add_mem_alloc.txt '+SIMULATOR_KERNEL)
+  os.system('cp array_add_mem_alloc.txt '+MAPPER_KERNEL)
+  os.system('cp array_add_PartPredDFG.xml '+ MAPPER_KERNEL)
 
 ##############################################################################################################################################
   print('\nRunning Morpher_CGRA_Mapper\n')
@@ -69,16 +69,16 @@ def main():
 
   os.system('rm *.bin') 
   os.system('mkdir binary')
-  os.system('python ../../../update_mem_alloc.py ../../../json_arch/hycube_original_updatemem.json microspeech_conv_layer_hycube_mem_alloc.txt 16384 2 hycube_original_mem.json')
-  os.system('python ../../../update_mem_alloc.py ../../../json_arch/hycube_original_updatemem_RC.json microspeech_conv_layer_hycube_mem_alloc.txt 16384 2 hycube_original_mem_RC.json')
+  os.system('python ../../../update_mem_alloc.py ../../../json_arch/hycube_original_updatemem.json array_add_mem_alloc.txt 16384 2 hycube_original_mem.json')
+  os.system('python ../../../update_mem_alloc.py ../../../json_arch/hycube_original_updatemem_RC.json array_add_mem_alloc.txt 16384 2 hycube_original_mem_RC.json')
   print('\nupdate memory allocation done!\n')
 
-  os.system('../../../build/src/cgra_xml_mapper -d microspeech_conv_layer_hycube_PartPredDFG.xml -x 4 -y 4 -j hycube_original_mem.json -i 10 -t HyCUBE_4REG')
+  os.system('../../../build/src/cgra_xml_mapper -d array_add_PartPredDFG.xml -x 4 -y 4 -j hycube_original_mem.json -t HyCUBE_4REG')
   for file in os.listdir("./"):
     if file.endswith(".bin"):
         II_left=int(file.split('II=')[-1].split(' ')[0].split('_MTP')[0].split(' ')[0])+1
     os.system('mv *.bin binary/left.bin')
-  os.system('../../../build/src/cgra_xml_mapper -d microspeech_conv_layer_hycube_PartPredDFG.xml -x 4 -y 4 -j hycube_original_mem_RC.json -i 10 -t HyCUBE_4REG')
+  os.system('../../../build/src/cgra_xml_mapper -d array_add_PartPredDFG.xml -x 4 -y 4 -j hycube_original_mem_RC.json -t HyCUBE_4REG')
   for file in os.listdir("./"):
     if file.endswith(".bin"):
         II_right=int(file.split('II=')[-1].split(' ')[0].split('_MTP')[0].split(' ')[0])+1
@@ -96,13 +96,13 @@ def main():
   print('\nRunning hycube_simulator\n')
   os.chdir(SIMULATOR_KERNEL)
   # list = os.listdir('memtraces')
-  num_memory_traces = 4#len(list) //comment it for whole invocation
+  num_memory_traces = len(list) #comment it for whole invocation
   
-  os.system('mv microspeech_conv_layer_hycube_mem_alloc.txt mem_alloc.txt')
+  os.system('mv array_add_mem_alloc.txt mem_alloc.txt')
   os.system('python3 ../../../scripts/duplicate_config.py > dup.log')
 
   for invocations in range(0,num_memory_traces) :
-    data_file = SIMULATOR_KERNEL + '/memtraces/microspeech_conv_layer_hycube_trace_' + str(invocations) + '.txt'
+    data_file = SIMULATOR_KERNEL + '/memtraces/array_add_trace_' + str(invocations) + '.txt'
     os.system('python3 ../../../scripts/skipdata.py --cubedata '+data_file)
     data_file_new = 'data_modi_' + str(invocations) + '.txt'
     os.system('cp data_modi.txt '+data_file_new)
@@ -171,12 +171,10 @@ def main():
   os.system('mkdir mem_files')
   for filename in os.listdir('dataDump'):
       if filename == 'dumped_raw_data_i0.txt':
-        BT.dump_trace_full("duplicated_config.bin",'dataDump/'+filename,II_left,4,"microspeech")
-        #os.system('python3 ../../../scripts/automate_new_skipdata.py --cubeins duplicated_config.bin --cubedata '+filename+' --cubetime '+str(II_left)+' --cubeclus 4') #cluster no is fixed
+        BT.dump_trace_full("duplicated_config.bin",'dataDump/'+filename,II_left,4,"array_add")
       else:
         BT.dump_trace_no_cmem('dataDump/'+filename,II_left,4)
-        #os.system('python3 ../../../scripts/automate_new_skipdata_no_config.py --cubeins duplicated_config.bin --cubedata '+filename+' --cubetime '+str(II_left)+' --cubeclus 4') #cluster no is fixed
-
+       
   os.system('mv *.trc *.h traces/')
 
 
