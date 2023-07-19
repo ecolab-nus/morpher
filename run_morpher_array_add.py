@@ -21,10 +21,10 @@ import scripts.bin_to_trace as BT
 
 def main():
 
-  if not 'MORPHER_HOME' in os.environ:
-    raise Exception('Set MORPHER_HOME directory as an environment variable (Ex: export MORPHER_HOME=/home/dmd/Workplace/Morphor/github_ecolab_repos)')
+  #if not 'MORPHER_HOME' in os.environ:
+  #  raise Exception('Set MORPHER_HOME directory as an environment variable (Ex: export MORPHER_HOME=/home/dmd/Workplace/Morphor/github_ecolab_repos)')
 
-  MORPHER_HOME = os.getenv('MORPHER_HOME')
+  MORPHER_HOME = os. getcwd() #os.getenv('MORPHER_HOME')
   DFG_GEN_HOME = MORPHER_HOME + '/Morpher_DFG_Generator'
   MAPPER_HOME = MORPHER_HOME + '/Morpher_CGRA_Mapper'
   SIMULATOR_HOME = MORPHER_HOME + '/hycube_simulator'
