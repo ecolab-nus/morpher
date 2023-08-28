@@ -35,6 +35,7 @@ jobs:
       - name: Install dependencies
         run: | 
          pip install -r python_requirements.txt
+         sudo apt update
          sudo apt-get install gcc-multilib g++-multilib
          sudo apt install build-essential 
          sudo apt -y install g++-7 
