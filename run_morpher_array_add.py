@@ -69,8 +69,8 @@ def main():
 
   os.system('rm *.bin') 
   os.system('mkdir binary')
-  os.system('python ../../../update_mem_alloc.py ../../../json_arch/hycube_original_updatemem.json array_add_mem_alloc.txt 16384 2 hycube_original_mem.json')
-  os.system('python ../../../update_mem_alloc.py ../../../json_arch/hycube_original_updatemem_RC.json array_add_mem_alloc.txt 16384 2 hycube_original_mem_RC.json')
+  os.system('python ../../../update_mem_alloc.py ../../../json_arch/hycube_original_updatemem.json array_add_mem_alloc.txt 8192 2 hycube_original_mem.json')
+  os.system('python ../../../update_mem_alloc.py ../../../json_arch/hycube_original_updatemem_RC.json array_add_mem_alloc.txt 8192 2 hycube_original_mem_RC.json')
   print('\nupdate memory allocation done!\n')
 
   os.system('../../../build/src/cgra_xml_mapper -d array_add_PartPredDFG.xml -x 4 -y 4 -j hycube_original_mem.json -t HyCUBE_4REG')

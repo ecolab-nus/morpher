@@ -69,8 +69,8 @@ def main():
 
   os.system('rm *.bin') 
   os.system('mkdir binary')
-  os.system('python ../../../update_mem_alloc.py ../../../json_arch/hycube_original_updatemem.json microspeech_conv_layer_hycube_mem_alloc.txt 16384 2 hycube_original_mem.json')
-  os.system('python ../../../update_mem_alloc.py ../../../json_arch/hycube_original_updatemem_RC.json microspeech_conv_layer_hycube_mem_alloc.txt 16384 2 hycube_original_mem_RC.json')
+  os.system('python ../../../update_mem_alloc.py ../../../json_arch/hycube_original_updatemem.json microspeech_conv_layer_hycube_mem_alloc.txt 8192 2 hycube_original_mem.json')
+  os.system('python ../../../update_mem_alloc.py ../../../json_arch/hycube_original_updatemem_RC.json microspeech_conv_layer_hycube_mem_alloc.txt 8192 2 hycube_original_mem_RC.json')
   print('\nupdate memory allocation done!\n')
 
   os.system('../../../build/src/cgra_xml_mapper -d microspeech_conv_layer_hycube_PartPredDFG.xml -x 4 -y 4 -j hycube_original_mem.json -i 10 -t HyCUBE_4REG')
