@@ -21,10 +21,11 @@ import scripts.bin_to_trace as BT
 
 def main():
 
-  if not 'MORPHER_HOME' in os.environ:
-    raise Exception('Set MORPHER_HOME directory as an environment variable (Ex: export MORPHER_HOME=/home/dmd/Workplace/Morphor/github_ecolab_repos)')
+  #if not 'MORPHER_HOME' in os.environ:
+  #  raise Exception('Set MORPHER_HOME directory as an environment variable (Ex: export MORPHER_HOME=/home/dmd/Workplace/Morphor/github_ecolab_repos)')
 
-  MORPHER_HOME = os.getenv('MORPHER_HOME')
+  #MORPHER_HOME = os.getenv('MORPHER_HOME')
+  MORPHER_HOME = os. getcwd()  
   DFG_GEN_HOME = MORPHER_HOME + '/Morpher_DFG_Generator'
   MAPPER_HOME = MORPHER_HOME + '/Morpher_CGRA_Mapper'
   SIMULATOR_HOME = MORPHER_HOME + '/hycube_simulator'
@@ -95,7 +96,9 @@ def main():
 ##############################################################################################################################################
   print('\nRunning hycube_simulator\n')
   os.chdir(SIMULATOR_KERNEL)
-  # list = os.listdir('memtraces')
+  os.system('mkdir traces')
+  os.system('mkdir mem_files')
+ # list = os.listdir('memtraces')
   num_memory_traces = 4#len(list) //comment it for whole invocation
   
   os.system('mv microspeech_conv_layer_hycube_mem_alloc.txt mem_alloc.txt')
@@ -130,23 +133,49 @@ def main():
       else:
         print("SUCCEED AT MEMTRACE "+ str(i))
 
+    if out_file == 'dumped_raw_data_i0':
+      BT.dump_trace_full("duplicated_config.bin",'dataDump/'+out_file + '.txt',II_left,4,"microspeech")
+      os.system('mv *.trc *.h traces/')
+    else:
+      os.system('mkdir traces/'+str(i))
+      BT.dump_trace_no_cmem('dataDump/'+out_file + '.txt',II_left,4,"microspeech")
+      os.system('mv *.trc *.h traces/'+str(i))    
+
   if half_invocations == 1 :
     os.system('../../../src/build/hycube_simulator duplicated_config.bin data_modi_' + str((invocation*4)) +'.txt mem_alloc.txt 8 8 16384 | tail -n 2 |head -n 1 > output.log')
     out_file = 'dumped_raw_data_i' + str(invocation)
     os.system('cp dumped_raw_data.txt dataDump/'+ out_file + '.txt')
-
+    if out_file == 'dumped_raw_data_i0':
+      BT.dump_trace_full("duplicated_config.bin",'dataDump/'+out_file + '.txt',II_left,half_invocations,"microspeech")
+      os.system('mv *.trc *.h traces/')
+    else:
+      os.system('mkdir traces/'+str(invocation))
+      BT.dump_trace_no_cmem('dataDump/'+out_file + '.txt',II_left,half_invocations,"microspeech")
+      os.system('mv *.trc *.h traces/'+str(invocation))
   
   if half_invocations == 2 :
     os.system('../../../src/build/hycube_simulator duplicated_config.bin data_modi_' + str((invocation*4)) +'.txt mem_alloc.txt 8 8 16384 data_modi_'  + str((invocation*4 + 1)) +'.txt | tail -n 2 |head -n 1 > output.log')
     out_file = 'dumped_raw_data_i' + str(invocation)
     os.system('cp dumped_raw_data.txt dataDump/'+ out_file + '.txt')
-
+    if out_file == 'dumped_raw_data_i0':
+      BT.dump_trace_full("duplicated_config.bin",'dataDump/'+out_file + '.txt',II_left,half_invocations,"microspeech")
+      os.system('mv *.trc *.h traces/')
+    else:
+      os.system('mkdir traces/'+str(invocation))
+      BT.dump_trace_no_cmem('dataDump/'+out_file + '.txt',II_left,half_invocations,"microspeech")
+      os.system('mv *.trc *.h traces/'+str(invocation))
 
   if half_invocations == 3 :
     os.system('../../../src/build/hycube_simulator duplicated_config.bin data_modi_' + str((invocation*4)) +'.txt mem_alloc.txt 8 8 16384 data_modi_'  + str((invocation*4 + 1))  + '.txt data_modi_' + str((invocation*4 + 2)) +'.txt | tail -n 2 |head -n 1 > output.log')
     out_file = 'dumped_raw_data_i' + str(invocation)
     os.system('cp dumped_raw_data.txt dataDump/'+ out_file + '.txt')
-
+    if out_file == 'dumped_raw_data_i0':
+      BT.dump_trace_full("duplicated_config.bin",'dataDump/'+out_file + '.txt',II_left,half_invocations,"microspeech")
+      os.system('mv *.trc *.h traces/')
+    else:
+      os.system('mkdir traces/'+str(invocation))
+      BT.dump_trace_no_cmem('dataDump/'+out_file + '.txt',II_left,half_invocations,"microspeech")
+      os.system('mv *.trc *.h traces/'+str(invocation))
 
   with open("output.log", 'r') as f:
     line = f.readline()
@@ -166,18 +195,18 @@ def main():
 #############################################################################################################################################
 ##############                                                  DUMP TRACE                                                    ###############
 #############################################################################################################################################
-  os.chdir(SIMULATOR_KERNEL)
-  os.system('mkdir traces')
-  os.system('mkdir mem_files')
-  for filename in os.listdir('dataDump'):
-      if filename == 'dumped_raw_data_i0.txt':
-        BT.dump_trace_full("duplicated_config.bin",'dataDump/'+filename,II_left,4,"microspeech")
-        #os.system('python3 ../../../scripts/automate_new_skipdata.py --cubeins duplicated_config.bin --cubedata '+filename+' --cubetime '+str(II_left)+' --cubeclus 4') #cluster no is fixed
-      else:
-        BT.dump_trace_no_cmem('dataDump/'+filename,II_left,4)
-        #os.system('python3 ../../../scripts/automate_new_skipdata_no_config.py --cubeins duplicated_config.bin --cubedata '+filename+' --cubetime '+str(II_left)+' --cubeclus 4') #cluster no is fixed
-
-  os.system('mv *.trc *.h traces/')
+#  os.chdir(SIMULATOR_KERNEL)
+#  os.system('mkdir traces')
+#  os.system('mkdir mem_files')
+#  for filename in os.listdir('dataDump'):
+#      if filename == 'dumped_raw_data_i0.txt':
+#        BT.dump_trace_full("duplicated_config.bin",'dataDump/'+filename,II_left,4,"microspeech")
+#        #os.system('python3 ../../../scripts/automate_new_skipdata.py --cubeins duplicated_config.bin --cubedata '+filename+' --cubetime '+str(II_left)+' --cubeclus 4') #cluster no is fixed
+#      else:
+#        BT.dump_trace_no_cmem('dataDump/'+filename,II_left,4)
+#        #os.system('python3 ../../../scripts/automate_new_skipdata_no_config.py --cubeins duplicated_config.bin --cubedata '+filename+' --cubetime '+str(II_left)+' --cubeclus 4') #cluster no is fixed
+#
+#  os.system('mv *.trc *.h traces/')
 
 
 
