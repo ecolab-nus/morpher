@@ -113,6 +113,9 @@ def main():
   # invocation = min(invocation,10)
   print("invocation number: ",invocation)
   os.system('mkdir dataDump')
+  os.system('mkdir traces')
+  os.system('mkdir mem_files')
+
   if invocation > 0 :
    for i in range(0,invocation) :
     os.system('../../../src/build/hycube_simulator duplicated_config.bin data_modi_' + str(i*4) +'.txt mem_alloc.txt 8 8 16384 data_modi_' + str((i*4 + 1)) + '.txt data_modi_' + str((i*4 + 2)) + '.txt data_modi_' + str((i*4 + 3)) +'.txt | tail -n 2 |head -n 1 > output.log')
@@ -130,22 +133,52 @@ def main():
       else:
         print("SUCCEED AT MEMTRACE "+ str(i))
 
+    if out_file == 'dumped_raw_data_i0':
+      BT.dump_trace_full("duplicated_config.bin",'dataDump/'+out_file + '.txt',II_left,4,"array_add")
+      os.system('mv *.trc *.h traces/')
+    else:
+      os.system('mkdir traces/'+str(i))
+      BT.dump_trace_no_cmem('dataDump/'+out_file + '.txt',II_left,4,"array_add")
+      os.system('mv *.trc *.h traces/'+str(i))
+
+
   if half_invocations == 1 :
     os.system('../../../src/build/hycube_simulator duplicated_config.bin data_modi_' + str((invocation*4)) +'.txt mem_alloc.txt 8 8 16384 | tail -n 2 |head -n 1 > output.log')
     out_file = 'dumped_raw_data_i' + str(invocation)
     os.system('cp dumped_raw_data.txt dataDump/'+ out_file + '.txt')
+    if out_file == 'dumped_raw_data_i0':
+      BT.dump_trace_full("duplicated_config.bin",'dataDump/'+out_file + '.txt',II_left,half_invocations,"array_add")
+      os.system('mv *.trc *.h traces/')
+    else:
+      os.system('mkdir traces/'+str(invocation))
+      BT.dump_trace_no_cmem('dataDump/'+out_file + '.txt',II_left,half_invocations,"array_add")
+      os.system('mv *.trc *.h traces/'+str(invocation))
 
   
   if half_invocations == 2 :
     os.system('../../../src/build/hycube_simulator duplicated_config.bin data_modi_' + str((invocation*4)) +'.txt mem_alloc.txt 8 8 16384 data_modi_'  + str((invocation*4 + 1)) +'.txt | tail -n 2 |head -n 1 > output.log')
     out_file = 'dumped_raw_data_i' + str(invocation)
     os.system('cp dumped_raw_data.txt dataDump/'+ out_file + '.txt')
+    if out_file == 'dumped_raw_data_i0':
+      BT.dump_trace_full("duplicated_config.bin",'dataDump/'+out_file + '.txt',II_left,half_invocations,"array_add")
+      os.system('mv *.trc *.h traces/')
+    else:
+      os.system('mkdir traces/'+str(invocation))
+      BT.dump_trace_no_cmem('dataDump/'+out_file + '.txt',II_left,half_invocations,"array_add")
+      os.system('mv *.trc *.h traces/'+str(invocation))
 
 
   if half_invocations == 3 :
     os.system('../../../src/build/hycube_simulator duplicated_config.bin data_modi_' + str((invocation*4)) +'.txt mem_alloc.txt 8 8 16384 data_modi_'  + str((invocation*4 + 1))  + '.txt data_modi_' + str((invocation*4 + 2)) +'.txt | tail -n 2 |head -n 1 > output.log')
     out_file = 'dumped_raw_data_i' + str(invocation)
     os.system('cp dumped_raw_data.txt dataDump/'+ out_file + '.txt')
+    if out_file == 'dumped_raw_data_i0':
+      BT.dump_trace_full("duplicated_config.bin",'dataDump/'+out_file + '.txt',II_left,half_invocations,"array_add")
+      os.system('mv *.trc *.h traces/')
+    else:
+      os.system('mkdir traces/'+str(invocation))
+      BT.dump_trace_no_cmem('dataDump/'+out_file + '.txt',II_left,half_invocations,"array_add")
+      os.system('mv *.trc *.h traces/'+str(invocation))
 
 
   with open("output.log", 'r') as f:
@@ -166,16 +199,18 @@ def main():
 #############################################################################################################################################
 ##############                                                  DUMP TRACE                                                    ###############
 #############################################################################################################################################
-  os.chdir(SIMULATOR_KERNEL)
-  os.system('mkdir traces')
-  os.system('mkdir mem_files')
-  for filename in os.listdir('dataDump'):
-      if filename == 'dumped_raw_data_i0.txt':
-        BT.dump_trace_full("duplicated_config.bin",'dataDump/'+filename,II_left,4,"array_add")
-      else:
-        BT.dump_trace_no_cmem('dataDump/'+filename,II_left,4)
-       
-  os.system('mv *.trc *.h traces/')
+#  os.chdir(SIMULATOR_KERNEL)
+#  os.system('mkdir traces')
+#  os.system('mkdir mem_files')
+#  for filename in os.listdir('dataDump'):
+#      if filename == 'dumped_raw_data_i0.txt':
+#        BT.dump_trace_full("duplicated_config.bin",'dataDump/'+filename,II_left,half_invocations,"array_add")
+#      else:
+#        os.system('mkdir traces/'+filename[-5])
+#        BT.dump_trace_no_cmem('dataDump/'+filename,II_left,)
+#        os.system('mv *.trc *.h traces/'+filename[-5])
+#       
+#  os.system('mv *.trc *.h traces/')
 
 
 
