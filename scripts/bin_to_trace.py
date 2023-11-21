@@ -352,7 +352,7 @@ def dump_trace_no_cmem(data_inp,TIMEEXEC,no_clusters_on,test):
     if(HY.WRITE_LUT):
         totaldata = open("totaldata.trc","a+")
         totaladdr = open("totaladdr.trc","a+")
-        extraaddr = "1000000000000000000\n1000000000000000001\n1000000000000000010\n1000000000000000011\n"
+        extraaddr = "1000000000000000000\n1000000000000000010\n1000000000000000100\n1000000000000000110\n"
         extradata = "0000000000001011\n0000000000000000\n0000000000000000\n0000000000000000\n"
         totaldata.write(extradata)
         totaladdr.write(extraaddr)
