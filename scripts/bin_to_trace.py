@@ -110,6 +110,7 @@ def dump_header(test):
     # Convert Registers
     # print(addr_register_unsort[0], addr_register_unsort[1])
     for ii in range(trace_register_len-1):
+        print("ii="+str(ii))
         if ((int(addr_register_unsort[ii], 2) % 4) == 0):
             if (int(addr_register_unsort[0], 2) == int(addr_register_unsort[1], 2) + 2):
                 addr_register_sort += [addr_register_unsort[ii]]
@@ -120,6 +121,7 @@ def dump_header(test):
     addr_register_sort += [addr_register_unsort[-1]]
     register_sort      += [register_unsort[-1]]
 
+    print("ADDR:")
     print(addr_register_sort)
     print(register_sort)
 
@@ -319,7 +321,7 @@ def dump_trace_full(ins_inp,data_inp,TIMEEXEC,no_clusters_on,test):
     if(HY.WRITE_LUT):
         totaldata = open("totaldata.trc","a+")
         totaladdr = open("totaladdr.trc","a+")
-        extraaddr = "1000000000000000000\n1000000000000000001\n1000000000000000010\n1000000000000000011\n"
+        extraaddr = "1000000000000000000\n1000000000000000010\n1000000000000000100\n1000000000000000110\n"
         extradata = "0000000000001011\n0000000000000000\n0000000000000000\n0000000000000000\n"
         totaldata.write(extradata)
         totaladdr.write(extraaddr)
