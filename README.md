@@ -24,7 +24,7 @@ You can build morpher on your Linux machine, or user docker on MAC/Linux.
 Note: Morpher requires LLVM 10.0.0 and g++ version cannot be higher than g++-v7. 
 
 ### build with docker
- > ***for HPCA tutorial***
+ > ***for tutorial***
 * Download the [docker file](https://raw.githubusercontent.com/ecolab-nus/morpher/main/Dockerfile) into an empty folder.
 * Go to the folder and Build ``morpher`` image: ``$ docker build ./ -t morpher``. This takes around 15 minutes.
 * Initalize: ``$ docker run --name morpher_tutorial -it morpher``
