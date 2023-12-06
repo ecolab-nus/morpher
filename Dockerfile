@@ -16,4 +16,4 @@ RUN apt-get update \
 	&& update-alternatives --install /usr/bin/llc llc /usr/bin/llc-10 100 \
 	&& update-alternatives --install /usr/bin/llvm-link llvm-link /usr/bin/llvm-link-10 100	\
 	&& update-alternatives --install /usr/bin/opt opt /usr/bin/opt-10 100 \
-	&& git clone --recurse-submodules https://github.com/ecolab-nus/morpher.git /home/hpca/morpher
+	&& git clone --recurse-submodules https://github.com/ecolab-nus/morpher.git /home/user/morpher
