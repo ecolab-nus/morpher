@@ -47,6 +47,8 @@ def main(csource, function, config= "config/default_config.yaml"):
   mapper_subfolder = config_dict["mapper_subfolder"]
   dfg_type = config_dict["dfg_type"]
   init_II = config_dict["init_II"]
+  ydim = config_dict["ydim"]
+  xdim = config_dict["xdim"]
   numberofbanks = config_dict["numberofbanks"]
   banksize = config_dict["banksize"] #8192*2 #8192*2
   totalsize = numberofbanks*banksize
@@ -107,39 +109,39 @@ def main(csource, function, config= "config/default_config.yaml"):
     os.system('cp '+kernel+'_PartPredDFG.xml '+ MAPPER_KERNEL )
     os.system('rm *.log')
 
-    if json_arch == 'hycube_original_mem.json':
-      print('\nCode instrumentation..\n')
-      os.system('clang -target i386-unknown-linux-gnu -c -emit-llvm -S %s/src/instrumentation/instrumentation.cpp -o instrumentation.ll' % DFG_GEN_HOME)
-      if kernel=='kernel_symm':
+    #if json_arch == 'hycube_original_mem.json':
+    print('\nCode instrumentation..\n')
+    os.system('clang -target i386-unknown-linux-gnu -c -emit-llvm -S %s/src/instrumentation/instrumentation.cpp -o instrumentation.ll' % DFG_GEN_HOME)
+    if kernel=='kernel_symm':
         os.system('clang -D CGRA_COMPILER -target i386-unknown-linux-gnu -c -emit-llvm -O2 -fno-tree-vectorize -fno-inline -fno-unroll-loops polybench.c -S -o polybench.ll')
         os.system('llvm-link %s_opt_instrument.ll instrumentation.ll polybench.ll -o final.ll' % (kernel))
-      else:
+    else:
         os.system('llvm-link %s_opt_instrument.ll instrumentation.ll -o final.ll' % (kernel))
 
-      os.system('llc -filetype=obj final.ll -o final.o')
-      os.system('clang++ -m32 final.o -o final')
+    os.system('llc -filetype=obj final.ll -o final.o')
+    os.system('clang++ -m32 final.o -o final')
 
 
   
-      print('Running instrumented code to generate the data memory content (memtraces/%s_trace_x.txt)..\n' % kernel)
-      os.system('./final 1> final_log.txt 2> final_err_log.txt')
-      # os.system('./final')
-      os.system('cp memtraces/'+kernel+'_trace_0.txt '+SIMULATOR_KERNEL)
-      os.system('cp '+kernel+'_mem_alloc.txt '+SIMULATOR_KERNEL )
-      os.system('cp '+kernel+'_mem_alloc.txt '+MAPPER_KERNEL )
-
+    print('Running instrumented code to generate the data memory content (memtraces/%s_trace_x.txt)..\n' % kernel)
+    os.system('./final 1> final_log.txt 2> final_err_log.txt')
+    # os.system('./final')
+    os.system('cp memtraces/'+kernel+'_trace_0.txt '+SIMULATOR_KERNEL)
+    os.system('cp '+kernel+'_mem_alloc.txt '+SIMULATOR_KERNEL )
+    os.system('cp '+kernel+'_mem_alloc.txt '+MAPPER_KERNEL )
+    
     os.system('rm *.ll')
   
 ##############################################################################################################################################
   if runmode == 'runall' or runmode == 'mapper_only':
     print('\n-----Running Morpher_CGRA_Mapper-----\n')
     os.chdir(MAPPER_KERNEL)
-  
+     
     #os.system('rm *.bin')  
-    if json_arch == 'hycube_original_mem.json':
+    if '_mem' in json_arch:
       print('\nUpdating memory allocation..\n')
       os.system('python %s/update_mem_alloc.py %s/json_arch/%s %s_mem_alloc.txt %d %d %s' % (MAPPER_HOME,MAPPER_HOME, json_arch_before_memupdate,kernel,banksize,numberofbanks, json_arch))
-      os.system('%s/build/src/cgra_xml_mapper -d %s_PartPredDFG.xml -x 4 -y 4 -j %s -i %d -t HyCUBE_4REG -m %d' % (MAPPER_HOME,kernel,json_arch, init_II, mapping_method))
+      os.system('%s/build/src/cgra_xml_mapper -d %s_PartPredDFG.xml -x %d -y %d -j %s -i %d -t HyCUBE_4REG -m %d' % (MAPPER_HOME,kernel,xdim,ydim,json_arch, init_II, mapping_method))
 
       os.chdir(SIMULATOR_KERNEL)
       os.system('rm *.bin')  
@@ -147,7 +149,7 @@ def main(csource, function, config= "config/default_config.yaml"):
       os.chdir(MAPPER_KERNEL)
       os.system('cp *.bin '+ SIMULATOR_KERNEL)
     else:
-      os.system('%s/build/src/cgra_xml_mapper -d %s_PartPredDFG.xml -x 4 -y 4 -j %s/json_arch/%s -i %d -m %d' % (MAPPER_HOME,kernel,MAPPER_HOME, json_arch, init_II, mapping_method))
+      os.system('%s/build/src/cgra_xml_mapper -d %s_PartPredDFG.xml -x %d -y %d -j %s/json_arch/%s -i %d -m %d' % (MAPPER_HOME,kernel,xdim,ydim,MAPPER_HOME, json_arch, init_II, mapping_method))
   
   
 
@@ -166,7 +168,7 @@ def main(csource, function, config= "config/default_config.yaml"):
   #   if mismatches == 0:
   #     print('Simulation test passed!')
 
-  if ((runmode == 'runall' or runmode == 'sim_only') and json_arch == 'hycube_original_mem.json'):
+  if ((runmode == 'runall' or runmode == 'sim_only')):
     print('\n-----Running hycube_simulator-----\n')
     os.chdir(SIMULATOR_KERNEL) 
     files = [f for f in listdir(MEM_TRACE) if isfile(join(MEM_TRACE, f)) and re.match(kernel+"_trace_[0-9]*\.txt", f)]
@@ -180,8 +182,8 @@ def main(csource, function, config= "config/default_config.yaml"):
     mismatches = 0
     for file in tqdm(samplefiles):
         # os.system('cp '+join(MEM_TRACE, file)+' '+SIMULATOR_KERNEL)
-        command = SIMULATOR_HOME+'/src/build/hycube_simulator -c '+SIMULATOR_KERNEL+'*.bin -d '+join(MEM_TRACE, file)+' -a '+SIMULATOR_KERNEL+kernel+'_mem_alloc.txt -m ' + str(totalsize)
-        # print(command)
+        command = SIMULATOR_HOME+'/src/build/hycube_simulator -x '+str(xdim)+' -y'+str(ydim)+ ' -c '+SIMULATOR_KERNEL+'*.bin -d '+join(MEM_TRACE, file)+' -a '+SIMULATOR_KERNEL+kernel+'_mem_alloc.txt -m ' + str(totalsize)
+        print(command)
         os.system(command)
         f = open("sim_result.txt", "r")
         sim_result = f.read()

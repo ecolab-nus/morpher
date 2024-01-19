@@ -1,0 +1,14 @@
+---
+ json_arch: "new_cgra_mem.json"
+ json_arch_before_memupdate: 'new_cgra_updatemem.json'
+ mapper_subfolder: 'new_cgra'
+ dfg_type: 'PartPred'
+ init_II: 0
+ ydim: 3
+ xdim: 4
+ numberofbanks: 2
+ banksize: 2048
+ max_test_samples: 5
+ mapping_method: 0
+ llvm_debug_type: 'no'
+
