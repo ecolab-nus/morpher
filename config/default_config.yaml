@@ -4,6 +4,8 @@
  mapper_subfolder: 'hycube'
  dfg_type: 'PartPred'
  init_II: 0
+ ydim: 4
+ xdim: 4
  numberofbanks: 2
  banksize: 2048
  max_test_samples: 5

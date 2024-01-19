@@ -4,6 +4,8 @@
  mapper_subfolder: 'arch_stdnoc8x8__dfgtype_cgrame'
  dfg_type: 'CGRAME'
  init_II: 0
+ ydim: 8
+ xdim: 8
  numberofbanks: 2
  banksize: 16384
  max_test_samples: 5
