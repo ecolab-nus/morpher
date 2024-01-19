@@ -28,10 +28,12 @@ Note: Morpher requires LLVM 10.0.0 and g++ version cannot be higher than g++-v7.
 * Download the [docker file](https://raw.githubusercontent.com/ecolab-nus/morpher/main/Dockerfile) into an empty folder.
 * Go to the folder and Build ``morpher`` image: ``$ docker build ./ -t morpher``. This takes around 15 minutes.
 * Initalize: ``$ docker run --name morpher_tutorial -it morpher``
-* Start the container: ``$ docker start morpher_tutorial``
-* Get into the container: ``docker exec -it morpher_tutorial /bin/bash``
 * Run ``cd /home/user/morpher`` and build all the submodules ``bash build_all.sh``. This takes a few minutes.
 * You should be able to run this command ``python -u run_morpher.py morpher_benchmarks/array_add/array_add.c array_add`` and see "Simulation test passed!!!". This takes a few minutes.
+
+To start the container again
+* Start the container: ``$ docker start morpher_tutorial``
+* Get into the container: ``docker exec -it morpher_tutorial /bin/bash``
 <br/><br/>
 <br/><br/>
 
