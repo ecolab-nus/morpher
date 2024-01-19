@@ -182,7 +182,7 @@ def main(csource, function, config= "config/default_config.yaml"):
     mismatches = 0
     for file in tqdm(samplefiles):
         # os.system('cp '+join(MEM_TRACE, file)+' '+SIMULATOR_KERNEL)
-        command = SIMULATOR_HOME+'/src/build/hycube_simulator -x '+str(xdim)+' -y'+str(ydim)+ ' -c '+SIMULATOR_KERNEL+'*.bin -d '+join(MEM_TRACE, file)+' -a '+SIMULATOR_KERNEL+kernel+'_mem_alloc.txt -m ' + str(totalsize)
+        command = SIMULATOR_HOME+'/src/build/hycube_simulator -x '+str(xdim)+' -y '+str(ydim)+ ' -c '+SIMULATOR_KERNEL+'*.bin -d '+join(MEM_TRACE, file)+' -a '+SIMULATOR_KERNEL+kernel+'_mem_alloc.txt -m ' + str(totalsize)
         print(command)
         os.system(command)
         f = open("sim_result.txt", "r")
