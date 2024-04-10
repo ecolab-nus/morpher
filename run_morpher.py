@@ -55,6 +55,7 @@ def main(csource, function, config= "config/default_config.yaml"):
   max_test_samples = config_dict["max_test_samples"]
   mapping_method = config_dict["mapping_method"]
   llvm_debug_type = config_dict["llvm_debug_type"] #'nothing' #'instrumentation'
+  morpher_light = config_dict["morpher_light"]
 
   kernel = function
   appfolder, csourcefile = csource.rsplit('/', 1)
@@ -168,7 +169,7 @@ def main(csource, function, config= "config/default_config.yaml"):
   #   if mismatches == 0:
   #     print('Simulation test passed!')
 
-  if ((runmode == 'runall' or runmode == 'sim_only')):
+  if ((runmode == 'runall' or runmode == 'sim_only') and not morpher_light):
     print('\n-----Running hycube_simulator-----\n')
     os.chdir(SIMULATOR_KERNEL) 
     files = [f for f in listdir(MEM_TRACE) if isfile(join(MEM_TRACE, f)) and re.match(kernel+"_trace_[0-9]*\.txt", f)]
