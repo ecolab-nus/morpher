@@ -34,10 +34,13 @@ TVM_DLL int32_t conv_main(void* args, int32_t* arg_type_ids, int32_t num_args, v
   if (!(arg_conv_1x1_strides == NULL)) {
   }
   for (int32_t j_outer = 0; j_outer < 4; ++j_outer) {
+    int idx = 0, mod = 0;
     for (int32_t j_inner_i_fused = 0; j_inner_i_fused < 141; ++j_inner_i_fused) {
       int32_t cse_var_5 = (j_outer * 3);
-      int32_t cse_var_4 = (j_inner_i_fused / 47);
-      int32_t cse_var_3 = ((j_inner_i_fused % 47) * 12);
+      /* int32_t cse_var_4 = (j_inner_i_fused / 47); */
+      /* int32_t cse_var_3 = ((j_inner_i_fused % 47) * 12); */
+      int32_t cse_var_4 = idx;
+      int32_t cse_var_3 = mod * 12;
       int32_t cse_var_2 = (cse_var_5 + cse_var_4);
       int32_t cse_var_1 = ((cse_var_3 + cse_var_5) + cse_var_4);
       ((int16_t*)conv_1x1)[cse_var_1] = (int16_t)0;
@@ -53,6 +56,14 @@ TVM_DLL int32_t conv_main(void* args, int32_t* arg_type_ids, int32_t num_args, v
       ((int16_t*)conv_1x1)[cse_var_1] = (((int16_t*)conv_1x1)[cse_var_1] + (((int16_t*)data)[(cse_var_3 + 9)] * ((int16_t*)kernel)[(cse_var_2 + 108)]));
       ((int16_t*)conv_1x1)[cse_var_1] = (((int16_t*)conv_1x1)[cse_var_1] + (((int16_t*)data)[(cse_var_3 + 10)] * ((int16_t*)kernel)[(cse_var_2 + 120)]));
       ((int16_t*)conv_1x1)[cse_var_1] = (((int16_t*)conv_1x1)[cse_var_1] + (((int16_t*)data)[(cse_var_3 + 11)] * ((int16_t*)kernel)[(cse_var_2 + 132)]));
+
+
+      if (mod+1==47) {
+          idx++;
+          mod=0;
+      } else {
+          mod++;
+      }
     }
   }
   return 0;

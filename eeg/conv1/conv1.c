@@ -37,17 +37,54 @@ TVM_DLL int32_t conv_main(void* args, int32_t* arg_type_ids, int32_t num_args, v
     for (int32_t w_inner_h_fused_oc_fused_rh_fused_rw_outer_fused_init = 0; w_inner_h_fused_oc_fused_rh_fused_rw_outer_fused_init < 45120; ++w_inner_h_fused_oc_fused_rh_fused_rw_outer_fused_init) {
       ((int16_t*)conv1)[((((((w_inner_h_fused_oc_fused_rh_fused_rw_outer_fused_init % 960) / 192) * 1128) + (w_outer * 282)) + ((w_inner_h_fused_oc_fused_rh_fused_rw_outer_fused_init / 960) * 6)) + ((w_inner_h_fused_oc_fused_rh_fused_rw_outer_fused_init % 192) >> 5))] = (int16_t)0;
     }
+    int32_t mod_192_i = 0;
+    int32_t div_192_i = 0, div_192_j= 0;
+    int32_t mod_960_i = 0;
+    int32_t div_960_i = 0;
+    int32_t div_960_j  = 0;
+
     for (int32_t w_inner_h_fused_oc_fused_rh_fused_rw_outer_fused = 0; w_inner_h_fused_oc_fused_rh_fused_rw_outer_fused < 45120; ++w_inner_h_fused_oc_fused_rh_fused_rw_outer_fused) {
-      int32_t cse_var_6 = (w_inner_h_fused_oc_fused_rh_fused_rw_outer_fused % 192);
-      int32_t cse_var_5 = (w_inner_h_fused_oc_fused_rh_fused_rw_outer_fused / 960);
-      int32_t cse_var_4 = ((w_inner_h_fused_oc_fused_rh_fused_rw_outer_fused % 960) / 192);
+      int32_t cse_var_6 = mod_192_i;
+      int32_t cse_var_5 = div_960_i;
+      int32_t cse_var_4 = div_192_i;
       int32_t cse_var_3 = (cse_var_6 * 4);
       int32_t cse_var_2 = ((((cse_var_4 * 315) + (w_outer * 47)) + ((w_inner_h_fused_oc_fused_rh_fused_rw_outer_fused & 31) * 4)) + cse_var_5);
       int32_t cse_var_1 = ((((cse_var_4 * 1128) + (w_outer * 282)) + (cse_var_5 * 6)) + (cse_var_6 >> 5));
+
+      /* int32_t cse_var_6 = (w_inner_h_fused_oc_fused_rh_fused_rw_outer_fused % 192); */
+      /* int32_t cse_var_5 = (w_inner_h_fused_oc_fused_rh_fused_rw_outer_fused / 960); */
+      /* int32_t cse_var_4 = ((w_inner_h_fused_oc_fused_rh_fused_rw_outer_fused % 960) / 192); */
+      /* int32_t cse_var_3 = (cse_var_6 * 4); */
+      /* int32_t cse_var_2 = ((((cse_var_4 * 315) + (w_outer * 47)) + ((w_inner_h_fused_oc_fused_rh_fused_rw_outer_fused & 31) * 4)) + cse_var_5); */
+      /* int32_t cse_var_1 = ((((cse_var_4 * 1128) + (w_outer * 282)) + (cse_var_5 * 6)) + (cse_var_6 >> 5)); */
       ((int16_t*)conv1)[cse_var_1] = (((int16_t*)conv1)[cse_var_1] + (((int16_t*)data)[cse_var_2] * ((int16_t*)kernel)[cse_var_3]));
       ((int16_t*)conv1)[cse_var_1] = (((int16_t*)conv1)[cse_var_1] + (((int16_t*)data)[(cse_var_2 + 1)] * ((int16_t*)kernel)[(cse_var_3 + 1)]));
       ((int16_t*)conv1)[cse_var_1] = (((int16_t*)conv1)[cse_var_1] + (((int16_t*)data)[(cse_var_2 + 2)] * ((int16_t*)kernel)[(cse_var_3 + 2)]));
       ((int16_t*)conv1)[cse_var_1] = (((int16_t*)conv1)[cse_var_1] + (((int16_t*)data)[(cse_var_2 + 3)] * ((int16_t*)kernel)[(cse_var_3 + 3)]));
+
+
+      if(mod_192_i+1 == 192){
+        mod_192_i = 0;
+      } else {
+        mod_192_i++;
+      }
+
+      if (div_192_j +1 == 192) {
+        div_192_i++;
+        div_192_j= 0;
+      } else {
+        div_192_j++;
+      }
+
+      if (mod_960_i + 1 == 960) {
+        div_960_i++;
+        mod_960_i=0;
+        div_192_i=0;
+        div_192_j=0;
+      } else {
+        mod_960_i++;
+      }
+
     }
   }
   return 0;
