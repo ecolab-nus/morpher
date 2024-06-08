@@ -11,6 +11,7 @@ import xml.etree.ElementTree as ET
 import xmltodict
 
 import scripts.bin_to_trace as BT
+from fire import Fire
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -303,6 +304,7 @@ def simulate(fnames : GenFiles, II):
   for i in range(invocation) :
     cmd(f'{simu_bin} duplicated_config.bin {fnames.memtrace_file(i*4)} {fnames.mem_alloc} 8 8 16384 {fnames.memtrace_file(i*4+1)}  {fnames.memtrace_file(i*4+2)} {fnames.memtrace_file(i*4+3)} | tail -n 2 | head -n 1 > output.log')
 
+
     with open("output.log", 'r') as fp:
       for line in fp:
         if re.search("Mismatches::0", line):
@@ -316,6 +318,7 @@ def simulate(fnames : GenFiles, II):
       else:
         logging.debug("SUCCEED AT MEMTRACE "+ str(i))
 
+    exit(-1)
     cmd(f"mv {fnames.raw_data_dump} {fnames.raw_data_dump_i(i)}")
     BT.dump_trace_full("duplicated_config.bin", fnames.raw_data_dump_i(i), II, 4, fnames.c_file_name)
 
@@ -365,13 +368,21 @@ def compile_int8(layer):
 
   _compile(layer[0], layer[1], layer[3], layer[5])
 
-
 layers = {
   "dwconv1": ["eeg/dwconv1", "dwconv1.c", "dwconv1_int16.c", "conv_main", "dwconv1", 9],
+  "dwconv1-new": ["eeg/dwconv1-new", "dwconv1.c", "dwconv1.c", "conv_main", "dwconv1", 3],
   "dwconv1_single": ["eeg/dwconv1", "dwconv1_single.c", "dwconv1_int16_single.c", "conv_main", "dwconv1", 9],
   "dwconv1_single_int8": ["eeg/dwconv1_int8", "dwconv1.c", "dwconv1_int16_single.c", "conv_main", "dwconv1", 9],
-  "dwconv2": ["eeg/dwconv2", "dwconv2.c", "dwconv2_int16.c", "conv_main", "dwconv2", 15]
+  "dwconv2": ["eeg/dwconv2", "dwconv2.c", "dwconv2_int16.c", "conv_main", "dwconv2", 15],
+  "conv1": ["eeg/conv1-splitmem", "conv1.c", "conv1.c", "conv_main", "conv1", 15]
 }
 
+## int8/int16 is legacy, need refactor this.
+def main(name, is_int8 = True):
+  if is_int8:
+    compile_int8(layers[name])
+  else:
+    compile(layers[name])
+
 if __name__ == '__main__':
-  compile_int8(layers["dwconv1_single_int8"])
+  Fire(main)
