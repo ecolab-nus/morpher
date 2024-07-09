@@ -11,5 +11,5 @@
  max_test_samples: 5
  mapping_method: 0
  llvm_debug_type: 'no'
- morpher_light: 'no'
+ morpher_light: 'yes'
 

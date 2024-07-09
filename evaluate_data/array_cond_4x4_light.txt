@@ -1,0 +1,81 @@
+
+    __  ___                 __                 ________________  ___       ____            _                ______                                             __  
+   /  |/  /___  _________  / /_  ___  _____   / ____/ ____/ __ \/   |     / __ \___  _____(_)___ _____     / ____/________ _____ ___  ___ _      ______  _____/ /__
+  / /|_/ / __ \/ ___/ __ \/ __ \/ _ \/ ___/  / /   / / __/ /_/ / /| |    / / / / _ \/ ___/ / __ `/ __ \   / /_  / ___/ __ `/ __ `__ \/ _ \ | /| / / __ \/ ___/ //_/
+ / /  / / /_/ / /  / /_/ / / / /  __/ /     / /___/ /_/ / _, _/ ___ |   / /_/ /  __(__  ) / /_/ / / / /  / __/ / /  / /_/ / / / / / /  __/ |/ |/ / /_/ / /  / ,<   
+/_/  /_/\____/_/  / .___/_/ /_/\___/_/      \____/\____/_/ |_/_/  |_|  /_____/\___/____/_/\__, /_/ /_/  /_/   /_/   \__,_/_/ /_/ /_/\___/|__/|__/\____/_/  /_/|_|  
+                 /_/                                                                     /____/                                                                    
+    
+
+ Kernel: array_cond 
+ C source: /home/wswolf/morpher_light/morpher/Morpher_DFG_Generator/benchmarks/morpher_benchmarks/array_cond/array_cond.c 
+ CGRA arch: /home/wswolf/morpher_light/morpher/Morpher_CGRA_Mapper/json_arch/stdnoc_allmem.json 
+ Config: ./config/config_stdnoc4x4_cgrame_light.yaml
+ Run mode: runall
+
+-----Running Morpher_DFG_Generator-----
+
+Generating IR..
+
+Optimizing IR..
+
+Generating DFG (array_cond_PartPredDFG.xml/dot) and data layout (array_cond_mem_alloc.txt)..
+
+dfgtype:PartPredLight
+array_condhello, I am here haha partPreLight
+hello, I am removing 
+DFG node count: 9
+DFG node count: 9
+
+-----Running Morpher_CGRA_Mapper-----
+
+Mapper arguments:
+xdim=4
+ydim=4
+json_arch=/home/wswolf/morpher_light/morpher/Morpher_CGRA_Mapper/json_arch/stdnoc_allmem.json
+dfg=array_cond_PartPredDFG.xml
+petype=
+ii=0
+mapping=1
+datapath_number=1
+max_iter=30
+hops=4
+noMutexPaths=false
+backtrack_limit=0
+max_II=32
+arch_name=
+lisa_training=false
+syn_dfg=false
+print_stat=false
+morpher_light=true
+dfg_id=none
+
+MAP begin... 
+Initial target II = 4 (ResMin II = 2 , RecMin II = 4, UserGiven II = 0 )
+#####################  Quick Mapper: 
+Current target II = 4, Iteration = 0
+route estimation failed...
+Map Failed!.
+Increasing II to 5
+#####################  Quick Mapper: 
+Current target II = 5, Iteration = 0
+route estimation failed...
+Map Failed!.
+Increasing II to 6
+#####################  Quick Mapper: 
+Current target II = 6, Iteration = 0
+route estimation failed...
+Map Failed!.
+Increasing II to 7
+#####################  Quick Mapper: 
+Current target II = 7, Iteration = 0
+route estimation failed...
+Map Failed!.
+Increasing II to 8
+#####################  Quick Mapper: 
+Current target II = 8, Iteration = 0
+noCongestion!
+noConflicts!
+Map Success with II = 8  (lat = 33)
+Elapsed time in seconds: 178566 ms
+/home/wswolf/morpher_light/morpher/Morpher_CGRA_Mapper/build/src/cgra_xml_mapper -d array_cond_PartPredDFG.xml -x 4 -y 4 -j /home/wswolf/morpher_light/morpher/Morpher_CGRA_Mapper/json_arch/stdnoc_allmem.json -i 0 -m 1 --morpher_light

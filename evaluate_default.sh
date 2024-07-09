@@ -1,0 +1,6 @@
+tmux new-session -d -s my_session_name1 'python -u run_morpher.py morpher_benchmarks/gemm/gemm.c gemm ./config/default_config.yaml > ./evaluate_data/gemm_default.txt'
+tmux new-session -d -s my_session_name2 'python -u run_morpher.py morpher_benchmarks/array_add/array_add.c array_add ./config/default_config.yaml > ./evaluate_data/array_add_default.txt'
+tmux new-session -d -s my_session_name3 'python -u run_morpher.py morpher_benchmarks/array_cond/array_cond.c array_cond ./config/default_config.yaml > ./evaluate_data/array_cond_default.txt'
+tmux new-session -d -s my_session_name4 'python -u run_morpher.py morpher_benchmarks/fft/fix_fft.c fix_fft ./config/default_config.yaml > ./evaluate_data/fft_default.txt'
+tmux new-session -d -s my_session_name5 'python -u run_morpher.py morpher_benchmarks/hpcg/hpcg.c hpcg ./config/default_config.yaml > ./evaluate_data/hpcg_default.txt'
+tmux new-session -d -s my_session_name6 'python -u run_morpher.py morpher_benchmarks/trmm/trmm.c trmm ./config/default_config.yaml > ./evaluate_data/trmm_default.txt'

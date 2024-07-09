@@ -1,0 +1,6 @@
+tmux new-session -d -s my_session_name13 'python -u run_morpher.py morpher_benchmarks/gemm/gemm.c gemm ./config/config_stdnoc8x8_cgrame.yaml > ./evaluate_data/gemm_8x8.txt'
+tmux new-session -d -s my_session_name14 'python -u run_morpher.py morpher_benchmarks/array_add/array_add.c array_add ./config/config_stdnoc8x8_cgrame.yaml > ./evaluate_data/array_add_8x8.txt'
+tmux new-session -d -s my_session_name15 'python -u run_morpher.py morpher_benchmarks/array_cond/array_cond.c array_cond ./config/config_stdnoc8x8_cgrame.yaml > ./evaluate_data/array_cond_8x8.txt'
+tmux new-session -d -s my_session_name16 'python -u run_morpher.py morpher_benchmarks/fft/fix_fft.c fix_fft ./config/config_stdnoc8x8_cgrame.yaml > ./evaluate_data/fft_8x8.txt'
+tmux new-session -d -s my_session_name17 'python -u run_morpher.py morpher_benchmarks/hpcg/hpcg.c hpcg ./config/config_stdnoc8x8_cgrame.yaml > ./evaluate_data/hpcg_8x8.txt'
+tmux new-session -d -s my_session_name18 'python -u run_morpher.py morpher_benchmarks/trmm/trmm.c trmm ./config/config_stdnoc8x8_cgrame.yaml > ./evaluate_data/trmm_8x8txt'
