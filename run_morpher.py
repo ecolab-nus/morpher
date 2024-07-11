@@ -82,9 +82,6 @@ def main(csource, function, config= "config/default_config.yaml"):
   # print('\n\n############## Morpher CGRA Framework #################\n')
   print('\n Kernel: %s \n C source: %s/benchmarks/%s \n CGRA arch: %s/json_arch/%s \n Config: %s\n Run mode: %s\n'% (kernel, DFG_GEN_HOME,csource, MAPPER_HOME, json_arch, config, runmode))
 
-  if morpher_light=="yes" and dfg_type!="PartPredLight":
-     dfg_type="PartPredLight"
-     print('When setting morpher_light to yes, the morpher will force the dfg_type to be partPredLight\n')
 
   
 
@@ -106,65 +103,55 @@ def main(csource, function, config= "config/default_config.yaml"):
     os.system('opt -gvn -mem2reg -memdep -memcpyopt -lcssa -loop-simplify -licm -loop-deletion -indvars -simplifycfg -mergereturn -indvars  %s.ll -S -o %s_opt.ll' % (kernel,kernel))
 
     print('Generating DFG (%s_PartPredDFG.xml/dot) and data layout (%s_mem_alloc.txt)..\n' % (kernel,kernel))
-    print('dfgtype:%s'%(dfg_type))
-    
-    # dfg_type="PartPred"
     os.system('opt -load %s/build/src/libdfggenPass.so -fn %s -nobanks %d -banksize %d -type %s  -skeleton %s_opt.ll -S -o %s_opt_instrument.ll' % (DFG_GEN_HOME,kernel,numberofbanks,banksize, dfg_type,kernel,kernel))
 
-    dfg_type=config_dict["dfg_type"]
+
     os.system('dot -Tpdf %s_PartPredDFG.dot -o %s_PartPredDFG.pdf' % (kernel,kernel))
     os.system('cp '+kernel+'_PartPredDFG.xml '+ MAPPER_KERNEL )
     os.system('rm *.log')
 
     #if json_arch == 'hycube_original_mem.json':
-    ###
-    if morpher_light=="no":
-      print('\nCode instrumentation..\n')
-      os.system('clang -target i386-unknown-linux-gnu -c -emit-llvm -S %s/src/instrumentation/instrumentation.cpp -o instrumentation.ll' % DFG_GEN_HOME)
-      if kernel=='kernel_symm':
-          os.system('clang -D CGRA_COMPILER -target i386-unknown-linux-gnu -c -emit-llvm -O2 -fno-tree-vectorize -fno-inline -fno-unroll-loops polybench.c -S -o polybench.ll')
-          os.system('llvm-link %s_opt_instrument.ll instrumentation.ll polybench.ll -o final.ll' % (kernel))
-      else:
-          os.system('llvm-link %s_opt_instrument.ll instrumentation.ll -o final.ll' % (kernel))
+    print('\nCode instrumentation..\n')
+    os.system('clang -target i386-unknown-linux-gnu -c -emit-llvm -S %s/src/instrumentation/instrumentation.cpp -o instrumentation.ll' % DFG_GEN_HOME)
+    if kernel=='kernel_symm':
+        os.system('clang -D CGRA_COMPILER -target i386-unknown-linux-gnu -c -emit-llvm -O2 -fno-tree-vectorize -fno-inline -fno-unroll-loops polybench.c -S -o polybench.ll')
+        os.system('llvm-link %s_opt_instrument.ll instrumentation.ll polybench.ll -o final.ll' % (kernel))
+    else:
+        os.system('llvm-link %s_opt_instrument.ll instrumentation.ll -o final.ll' % (kernel))
 
-      os.system('llc -filetype=obj final.ll -o final.o')
-      os.system('clang++ -m32 final.o -o final')
+    os.system('llc -filetype=obj final.ll -o final.o')
+    os.system('clang++ -m32 final.o -o final')
 
 
+  
+    print('Running instrumented code to generate the data memory content (memtraces/%s_trace_x.txt)..\n' % kernel)
+    os.system('./final 1> final_log.txt 2> final_err_log.txt')
+    # os.system('./final')
+    os.system('cp memtraces/'+kernel+'_trace_0.txt '+SIMULATOR_KERNEL)
+    os.system('cp '+kernel+'_mem_alloc.txt '+SIMULATOR_KERNEL )
+    os.system('cp '+kernel+'_mem_alloc.txt '+MAPPER_KERNEL )
     
-      print('Running instrumented code to generate the data memory content (memtraces/%s_trace_x.txt)..\n' % kernel)
-      os.system('./final 1> final_log.txt 2> final_err_log.txt')
-      # os.system('./final')
-      os.system('cp memtraces/'+kernel+'_trace_0.txt '+SIMULATOR_KERNEL)
-      os.system('cp '+kernel+'_mem_alloc.txt '+SIMULATOR_KERNEL )
-      os.system('cp '+kernel+'_mem_alloc.txt '+MAPPER_KERNEL )
-    ###
     os.system('rm *.ll')
- 
   
 ##############################################################################################################################################
   if runmode == 'runall' or runmode == 'mapper_only':
     print('\n-----Running Morpher_CGRA_Mapper-----\n')
     os.chdir(MAPPER_KERNEL)
-    
-    light_mapper = ""
-    if morpher_light=="yes":
-       light_mapper = "--morpher_light"
+     
     #os.system('rm *.bin')  
     if '_mem' in json_arch:
       print('\nUpdating memory allocation..\n')
       os.system('python %s/update_mem_alloc.py %s/json_arch/%s %s_mem_alloc.txt %d %d %s' % (MAPPER_HOME,MAPPER_HOME, json_arch_before_memupdate,kernel,banksize,numberofbanks, json_arch))
-      os.system('%s/build/src/cgra_xml_mapper -d %s_PartPredDFG.xml -x %d -y %d -j %s -i %d -t HyCUBE_4REG -m %d %s' % (MAPPER_HOME, kernel,xdim,ydim,json_arch, init_II, mapping_method, light_mapper))
-      print('%s/build/src/cgra_xml_mapper -d %s_PartPredDFG.xml -x %d -y %d -j %s -i %d -t HyCUBE_4REG -m %d %s' % (MAPPER_HOME, kernel,xdim,ydim,json_arch, init_II, mapping_method, light_mapper))
+      os.system('%s/build/src/cgra_xml_mapper -d %s_PartPredDFG.xml -x %d -y %d -j %s -i %d -t HyCUBE_4REG -m %d' % (MAPPER_HOME,kernel,xdim,ydim,json_arch, init_II, mapping_method))
+
       os.chdir(SIMULATOR_KERNEL)
       os.system('rm *.bin')  
   
       os.chdir(MAPPER_KERNEL)
       os.system('cp *.bin '+ SIMULATOR_KERNEL)
     else:
-      os.system('%s/build/src/cgra_xml_mapper -d %s_PartPredDFG.xml -x %d -y %d -j %s/json_arch/%s -i %d -m %d %s' % (MAPPER_HOME,kernel,xdim,ydim,MAPPER_HOME, json_arch, init_II, mapping_method, light_mapper))
-      print('%s/build/src/cgra_xml_mapper -d %s_PartPredDFG.xml -x %d -y %d -j %s/json_arch/%s -i %d -m %d %s' % (MAPPER_HOME,kernel,xdim,ydim,MAPPER_HOME, json_arch, init_II, mapping_method, light_mapper))
-     
+      os.system('%s/build/src/cgra_xml_mapper -d %s_PartPredDFG.xml -x %d -y %d -j %s/json_arch/%s -i %d -m %d' % (MAPPER_HOME,kernel,xdim,ydim,MAPPER_HOME, json_arch, init_II, mapping_method))
+  
   
 
 ##############################################################################################################################################
