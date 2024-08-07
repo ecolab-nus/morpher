@@ -1,45 +1,22 @@
 ![morpher_cover](https://user-images.githubusercontent.com/12274945/198943201-17e9ff67-62b3-445f-bd04-feac08da1601.png)
 
-# Morpher: An Open-Source Tool for CGRA Accelerators 
+# Morpher_light: A lightweight version of Morpher
 
 [![Actions Status](https://github.com/ecolab-nus/morpher/workflows/Build%20and%20Test/badge.svg)](https://github.com/ecolab-nus/morpher/actions)
 [![GitHub Clones](https://img.shields.io/badge/dynamic/json?color=success&label=Clone&query=count&url=https://gist.githubusercontent.com/Dhananjayadmd/5baff68360b70cb31e4d861cf11f219e/raw/clone.json&logo=github)](https://github.com/MShawon/github-clone-count-badge)
 
 
-Morpher is a powerful, integrated compilation and simulation framework, that can assist design space exploration and application-level developments of CGRA based systems. Morpher can take an application with a compute intensive kernel as input, compile the kernel onto a user-provided CGRA architecture, and automatically validate the compiled kernels through cycle-accurate simulation using test data extracted from the application. Morpher can handle real-world application kernels without being limited to simple toy kernels through its feature-rich compiler. Morpher architecture description language
-lets users easily specify architectural features such as complex interconnects, multi-hop routing, and memory organizations. 
-
-![framework](https://user-images.githubusercontent.com/12274945/198694251-ab21d639-8999-424a-bc5a-3e7921c638a0.png)
-
-More information:
-    [WOSET 2022 Presentation](https://woset-workshop.github.io/Videos/2022/12-Wijerathne-long.mp4) (Artifact demonstration from 13.25), 
-    [WOSET 2022 paper](https://woset-workshop.github.io/PDFs/2022/12-Wijerathne-paper.pdf)
-    
-![ezgif com-gif-maker(2)](https://user-images.githubusercontent.com/12274945/198826823-5230947d-86eb-4493-a6fc-5f43d61ab2b4.gif)
+morpher_light is a simplified version of Morpher, achieved by removing AGI instructions to simplify DFG generation. It offers a faster yet accurate simulation for CGRA-based systems. It also supports real-world applications and allows easy specification of complex architectural features. This version is ideal for rapid design space exploration and application-level development.
 
 
 ## Getting Started:
-You can build morpher on your Linux machine, or user docker on MAC/Linux.
 
-Note: Morpher requires LLVM 10.0.0 and g++ version cannot be higher than g++-v7. 
+Note: Morpher_light requires LLVM 10.0.0 and g++ version cannot be higher than g++-v7. 
 
-### build with docker
- > ***for tutorial***
-* Download the [docker file](https://raw.githubusercontent.com/ecolab-nus/morpher/main/Dockerfile) into an empty folder.
-* Go to the folder and Build ``morpher`` image: ``$ docker build ./ -t morpher``. This takes around 15 minutes.
-* Initalize: ``$ docker run --name morpher_tutorial -it morpher``
-* Run ``cd /home/user/morpher`` and build all the submodules ``bash build_all.sh``. This takes a few minutes.
-* You should be able to run this command ``python -u run_morpher.py morpher_benchmarks/array_add/array_add.c array_add`` and see "Simulation test passed!!!". This takes a few minutes.
-
-To start the container again
-* Start the container: ``$ docker start morpher_tutorial``
-* Get into the container: ``docker exec -it morpher_tutorial /bin/bash``
-<br/><br/>
-<br/><br/>
 
 ### build on your machine
 * Pull the code
-clone first:  `git clone --recurse-submodules  https://github.com/ecolab-nus/Morpher.git` \
+clone first:  `git clone --branch mopher_light https://github.com/ecolab-nus/morpher.git` \
 pull the latest changes of submodules.:  `git submodule update --init --remote`
 
 
@@ -66,23 +43,27 @@ follow https://github.com/llvm/llvm-project
 
 ## Compiling kernels:
 
-1) Specify the target arch, dfg_type, mapping method, memory bank sizes,.. in config/<>.yaml file. (default_config file targets hycube 4x4 architecture)
+1) If you want to use the morpher_light version, make sure `dfg_type: 'PartPredLight'` and `morpher_light: 'yes'` in config/<>.yaml file (default_config file targets hycube 4x4 architecture). The following shows the template settings of the config file:
+
+    json_arch: "hycube_original_mem.json"
+    json_arch_before_memupdate: 'hycube_original_updatemem.json'
+    mapper_subfolder: 'hycube'
+    dfg_type: 'PartPredLight'
+    init_II: 0
+    ydim: 4
+    xdim: 4
+    numberofbanks: 2
+    banksize: 2048
+    max_test_samples: 5
+    mapping_method: 0
+    llvm_debug_type: 'no'
+    morpher_light: 'yes'
+
 2) Run the script:  ``$python run_morpher.py <path to c source code in benchmark folder>  <target function> <configurations(default: config/default_config.yaml)>``. 
 
-Examples: 
+Examples (running array_add on hycube 4x4):
 
-1. Compile and verify simple kernels on hycube 4x4:
-
-``$python -u run_morpher.py morpher_benchmarks/array_add/array_add.c array_add``
-
-Please refer the following workflow for more examples.
-
-[![Actions Status](https://github.com/ecolab-nus/morpher/workflows/Run%20Examples/badge.svg)](https://github.com/ecolab-nus/morpher/actions)
-
-2. Compile and verify kernels from Microspeech Application:
-
-[![Actions Status](https://github.com/ecolab-nus/morpher/workflows/Run%20Microspeech/badge.svg)](https://github.com/ecolab-nus/morpher/actions)
-
+``$python -u run_morpher.py morpher_benchmarks/array_add/array_add.c array_add ./config/default_light_config.yaml``
 
 # Publications
 
@@ -157,5 +138,4 @@ ACM Transactions on Reconfigurable Technology and Systems 2014
 Liang Chen, Tulika Mitra\
 International Conference on Field Programmable Technology, December 2012\
 __Best Paper Award__
-
 
