@@ -6,7 +6,7 @@
 [![GitHub Clones](https://img.shields.io/badge/dynamic/json?color=success&label=Clone&query=count&url=https://gist.githubusercontent.com/Dhananjayadmd/5baff68360b70cb31e4d861cf11f219e/raw/clone.json&logo=github)](https://github.com/MShawon/github-clone-count-badge)
 
 
-morpher_light is a simplified version of Morpher, achieved by removing AGI instructions to simplify DFG generation. It offers a faster yet accurate simulation for CGRA-based systems. It also supports real-world applications and allows easy specification of complex architectural features. This version is ideal for rapid design space exploration and application-level development.
+Morpher_light is a simplified version of morpher, achieved by removing AGI instructions to simplify DFG generation. It offers a faster yet accurate simulation for CGRA-based systems. It also supports real-world applications and allows easy specification of complex architectural features. This version is ideal for rapid design space exploration and application-level development.
 
 
 ## Getting Started:
@@ -45,19 +45,19 @@ follow https://github.com/llvm/llvm-project
 
 1) If you want to use the morpher_light version, make sure `dfg_type: 'PartPredLight'` and `morpher_light: 'yes'` in config/<>.yaml file (default_config file targets hycube 4x4 architecture). The following shows the template settings of the config file:
 
-    json_arch: "hycube_original_mem.json"
-    json_arch_before_memupdate: 'hycube_original_updatemem.json'
-    mapper_subfolder: 'hycube'
-    dfg_type: 'PartPredLight'
-    init_II: 0
-    ydim: 4
-    xdim: 4
-    numberofbanks: 2
-    banksize: 2048
-    max_test_samples: 5
-    mapping_method: 0
-    llvm_debug_type: 'no'
-    morpher_light: 'yes'
+        json_arch: "hycube_original_mem.json"
+        json_arch_before_memupdate: 'hycube_original_updatemem.json'
+        mapper_subfolder: 'hycube'
+        dfg_type: 'PartPredLight'
+        init_II: 0
+        ydim: 4
+        xdim: 4
+        numberofbanks: 2
+        banksize: 2048
+        max_test_samples: 5
+        mapping_method: 0
+        llvm_debug_type: 'no'
+        morpher_light: 'yes'
 
 2) Run the script:  ``$python run_morpher.py <path to c source code in benchmark folder>  <target function> <configurations(default: config/default_config.yaml)>``. 
 
