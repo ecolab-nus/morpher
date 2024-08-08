@@ -84,6 +84,33 @@ Please refer the following workflow for more examples.
 [![Actions Status](https://github.com/ecolab-nus/morpher/workflows/Run%20Microspeech/badge.svg)](https://github.com/ecolab-nus/morpher/actions)
 
 
+
+## Using the Light Mode of Morpher:
+ To achieve faster yet accurate simulation for CGRA-based systems,  a light mode morpher_light is provided. It is achieved by removing AGI instructions to simplify DFG generation. This version is ideal for rapid design space exploration and application-level development.
+
+ ### Enable Light Mode
+
+To enable the light mode of Morpher,  make sure `dfg_type: 'PartPredLight'` and `morpher_light: 'yes'` are set in the `config/<>.yaml` file. The following shows the template settings of the config file:
+
+        json_arch: "hycube_original_mem.json"
+        json_arch_before_memupdate: 'hycube_original_updatemem.json'
+        mapper_subfolder: 'hycube'
+        dfg_type: 'PartPredLight'
+        init_II: 0
+        ydim: 4
+        xdim: 4
+        numberofbanks: 2
+        banksize: 2048
+        max_test_samples: 5
+        mapping_method: 0
+        llvm_debug_type: 'no'
+        morpher_light: 'yes'
+
+
+Examples (running array_add on hycube 4x4 using the light mode):
+
+``$python -u run_morpher.py morpher_benchmarks/array_add/array_add.c array_add ./config/default_light_config.yaml``
+
 # Publications
 
 [WOSET] [Morpher: An Open-Source Integrated Compilation and Simulation Framework for CGRA](https://www.comp.nus.edu.sg/~tulika/WOSET_MORPHER_2022.pdf)\
@@ -157,5 +184,4 @@ ACM Transactions on Reconfigurable Technology and Systems 2014
 Liang Chen, Tulika Mitra\
 International Conference on Field Programmable Technology, December 2012\
 __Best Paper Award__
-
 
