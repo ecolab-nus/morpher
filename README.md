@@ -9,6 +9,10 @@
 Morpher is a powerful, integrated compilation and simulation framework, that can assist design space exploration and application-level developments of CGRA based systems. Morpher can take an application with a compute intensive kernel as input, compile the kernel onto a user-provided CGRA architecture, and automatically validate the compiled kernels through cycle-accurate simulation using test data extracted from the application. Morpher can handle real-world application kernels without being limited to simple toy kernels through its feature-rich compiler. Morpher architecture description language
 lets users easily specify architectural features such as complex interconnects, multi-hop routing, and memory organizations. 
 
+To enable faster yet accurate simulation for CGRA-based systems,  a light version morpher_light is provided. It is achieved by removing AGI instructions to simplify DFG generation. This version is ideal for rapid design space exploration and application-level development. [Click here to use the light version of morpher](#using-the-light-version-of-morpher).
+
+
+
 ![framework](https://user-images.githubusercontent.com/12274945/198694251-ab21d639-8999-424a-bc5a-3e7921c638a0.png)
 
 More information:
@@ -85,12 +89,11 @@ Please refer the following workflow for more examples.
 
 
 
-## Using the Light Mode of Morpher:
- To achieve faster yet accurate simulation for CGRA-based systems,  a light mode morpher_light is provided. It is achieved by removing AGI instructions to simplify DFG generation. This version is ideal for rapid design space exploration and application-level development.
 
- ### Enable Light Mode
 
-To enable the light mode of Morpher,  make sure `dfg_type: 'PartPredLight'` and `morpher_light: 'yes'` are set in the `config/<>.yaml` file. The following shows the template settings of the config file:
+ ## Using the Light Version of Morpher
+
+To use the light version of morpher,  make sure `dfg_type: 'PartPredLight'` and `morpher_light: 'yes'` are set in the `config/<>.yaml` file. The following shows the template settings of the config file:
 
         json_arch: "hycube_original_mem.json"
         json_arch_before_memupdate: 'hycube_original_updatemem.json'
