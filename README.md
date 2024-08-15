@@ -5,11 +5,13 @@
 [![Actions Status](https://github.com/ecolab-nus/morpher/workflows/Build%20and%20Test/badge.svg)](https://github.com/ecolab-nus/morpher/actions)
 [![GitHub Clones](https://img.shields.io/badge/dynamic/json?color=success&label=Clone&query=count&url=https://gist.githubusercontent.com/Dhananjayadmd/5baff68360b70cb31e4d861cf11f219e/raw/clone.json&logo=github)](https://github.com/MShawon/github-clone-count-badge)
 
+_<b>Morpher_LIGHT: We provide morpher_light now! It can compile and map in seconds!</b>_ [Click here to use the light version of morpher](#using-the-light-version-of-morpher).
+
 
 Morpher is a powerful, integrated compilation and simulation framework, that can assist design space exploration and application-level developments of CGRA based systems. Morpher can take an application with a compute intensive kernel as input, compile the kernel onto a user-provided CGRA architecture, and automatically validate the compiled kernels through cycle-accurate simulation using test data extracted from the application. Morpher can handle real-world application kernels without being limited to simple toy kernels through its feature-rich compiler. Morpher architecture description language
 lets users easily specify architectural features such as complex interconnects, multi-hop routing, and memory organizations. 
 
-To enable faster yet accurate simulation for CGRA-based systems,  a light version morpher_light is provided. It is achieved by removing AGI instructions to simplify DFG generation. This version is ideal for rapid design space exploration and application-level development. [Click here to use the light version of morpher](#using-the-light-version-of-morpher).
+
 
 
 
@@ -109,6 +111,7 @@ To use the light version of morpher,  make sure `dfg_type: 'PartPredLight'` and 
         llvm_debug_type: 'no'
         morpher_light: 'yes'
 
+If you set morpher_light as "yes", we will force the DFG type to be _PartPredLight_
 
 Examples (running array_add on hycube 4x4 using the light mode):
 
