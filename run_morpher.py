@@ -23,7 +23,7 @@ from time import sleep
 
 def main(csource, function, config= "config/default_config.yaml"):
 
-  runmode = 'runall' # runall, dfg_gen_only, mapper_only, sim_only
+  runmode = 'sim_only' # runall, dfg_gen_only, mapper_only, sim_only
 
   print(r"""
     __  ___                 __                 ________________  ___       ____            _                ______                                             __  
@@ -57,7 +57,6 @@ def main(csource, function, config= "config/default_config.yaml"):
   llvm_debug_type = config_dict["llvm_debug_type"] #'nothing' #'instrumentation'
   
   morpher_light = True if config_dict["morpher_light"].lower() == "yes" else False
-  print("I am here",morpher_light)
   kernel = function
   appfolder, csourcefile = csource.rsplit('/', 1)
 
