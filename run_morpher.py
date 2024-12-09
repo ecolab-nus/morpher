@@ -23,7 +23,7 @@ from time import sleep
 
 def main(csource, function, config= "config/default_config.yaml"):
 
-  runmode = 'sim_only' # runall, dfg_gen_only, mapper_only, sim_only
+  runmode = 'runall' # runall, dfg_gen_only, mapper_only, sim_only
 
   print(r"""
     __  ___                 __                 ________________  ___       ____            _                ______                                             __  
