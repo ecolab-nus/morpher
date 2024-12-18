@@ -37,7 +37,10 @@ jobs:
          pip install -r python_requirements.txt
          sudo apt-get install gcc-multilib g++-multilib
          sudo apt install build-essential 
-         sudo apt -y install g++-7 
+         sudo apt -y install g++-7
+      - name: Get the latest update
+        run: |
+           git submodule update --init --remote
       - name: Build all
         run: |
           bash build_all.sh
