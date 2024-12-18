@@ -91,9 +91,9 @@ Please refer the following workflow for more examples.
 
 
 
+## Miscellaneous
 
-
- ## Using the Light Version of Morpher
+### Using the light version of Morpher
 
 To use the light version of morpher,  make sure `dfg_type: 'PartPredLight'` and `morpher_light: 'yes'` are set in the `config/<>.yaml` file. The following shows the template settings of the config file:
 
@@ -115,9 +115,13 @@ If you set morpher_light as "yes", we will force the DFG type to be _PartPredLig
 
 Examples (running array_add on hycube 4x4 using the light mode):
 
+
 ``$python -u run_morpher.py morpher_benchmarks/array_add/array_add.c array_add ./config/default_light_config.yaml``
 
-# Publications
+### Change to 16 bit
+The default precision is int32.  Uncomment "#define ARCHI_16BIT" in line 4 of "Morpher_DFG_Generator/include/morpherdfggen/common/ArchPrecision.h" and "hycube_simulator/src/ArchPrecision.h"
+
+## Publications
 
 [WOSET] [Morpher: An Open-Source Integrated Compilation and Simulation Framework for CGRA](https://www.comp.nus.edu.sg/~tulika/WOSET_MORPHER_2022.pdf)\
 (to appear in Workshop on Open-Source EDA Technology co-sponsored by ICCAD 2022)
