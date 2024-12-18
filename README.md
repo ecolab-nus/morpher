@@ -119,7 +119,7 @@ Examples (running array_add on hycube 4x4 using the light mode):
 ``$python -u run_morpher.py morpher_benchmarks/array_add/array_add.c array_add ./config/default_light_config.yaml``
 
 ### Change to 16 bit
-The default precision is int32.  Uncomment "#define ARCHI_16BIT" in line 4 of "Morpher_DFG_Generator/include/morpherdfggen/common/ArchPrecision.h" and "hycube_simulator/src/ArchPrecision.h"
+The default precision is int32. To change to 16 bit, uncomment "#define ARCHI_16BIT" in line 4 of "Morpher_DFG_Generator/include/morpherdfggen/common/ArchPrecision.h" and "hycube_simulator/src/ArchPrecision.h"
 
 ## Publications
 
