@@ -1,9 +1,10 @@
 name: Build and Test
 on: 
   push:
-    paths:
-      - '.gitmodules'
-      - '**/.git-submodule'
+  schedule:
+    # Runs at 00:00 UTC every three days
+    # Using cron syntax: minute hour day-of-month month day-of-week
+    - cron: '0 0 */2 * *
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-20.04
