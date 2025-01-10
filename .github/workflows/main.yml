@@ -1,5 +1,9 @@
 name: Build and Test
-on: [push]
+on: 
+  push:
+    paths:
+      - '.gitmodules'
+      - '**/.git-submodule'
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-20.04
