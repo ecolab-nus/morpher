@@ -2,14 +2,11 @@
 	path = Morpher_CGRA_Mapper
 	url = https://github.com/ecolab-nus/Morpher_CGRA_Mapper.git
 	branch = stable
-	update = rebase
 [submodule "Morpher_DFG_Generator"]
 	path = Morpher_DFG_Generator
 	url = https://github.com/ecolab-nus/Morpher_DFG_Generator.git
 	branch = stable
-	update = rebase
 [submodule "hycube_simulator"]
 	path = hycube_simulator
 	url = https://github.com/ecolab-nus/hycube_simulator.git
 	branch = master
-	update = rebase
