@@ -2,7 +2,8 @@ name: Build and Test
 on: 
   push:
   schedule:
-    - cron: '0 0 */2 * *'
+    # run the workflow every day
+    - cron: '0 0 * * *'
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-20.04
