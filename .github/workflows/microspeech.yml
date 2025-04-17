@@ -2,7 +2,7 @@ name: Run Microspeech
 on: [workflow_dispatch]
 jobs:
   Run-Microspeech:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
