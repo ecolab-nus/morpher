@@ -7,7 +7,7 @@ import os
 import os.path
 
 ## PYTHON FILE with constants
-import scripts.hycube_config as HY
+import scripts.pace_agu_config as HY
 
 def list_to_file(data, name, target):
     length = len(data)
@@ -72,6 +72,7 @@ def dump_header(test):
     addr_register_sort = []
     register_sort      = []
 
+    
     # Covert Config memory
     for ii in range(trace_config_len):
         if ((int(addr_config_unsort[ii], 2) % 4) == 0):
@@ -84,18 +85,18 @@ def dump_header(test):
 
     print('\nLength of Sorted Config Memory Address :' + str(len(addr_config_sort)))
     print('Length of Sorted Config Memory         :' + str(len(config_sort)))
-
-    # Convert Data Memory
-    for ii in range(trace_data_len):
-        if ((int(addr_data_unsort[ii], 2) % 4) == 0):
-            if (int(addr_data_unsort[0], 2) == int(addr_data_unsort[1], 2) + 2):
-                addr_data_sort += [addr_data_unsort[ii]]
-                data_sort      += [data_unsort[ii-1][0:-1] + data_unsort[ii]]
-                result_sort    += [result_unsort[ii-1][0:-1] + result_unsort[ii]]
-            else:
-                addr_data_sort += [addr_data_unsort[ii]]
-                data_sort      += [data_unsort[ii+1][0:-1] + data_unsort[ii]]
-                result_sort    += [result_unsort[ii+1][0:-1] + result_unsort[ii]]
+    if HY.DM_WIDTH == 64:
+        # Convert Data Memory
+        for ii in range(trace_data_len):
+            if ((int(addr_data_unsort[ii], 2) % 4) == 0):
+                if (int(addr_data_unsort[0], 2) == int(addr_data_unsort[1], 2) + 2):
+                    addr_data_sort += [addr_data_unsort[ii]]
+                    data_sort      += [data_unsort[ii-1][0:-1] + data_unsort[ii]]
+                    result_sort    += [result_unsort[ii-1][0:-1] + result_unsort[ii]]
+                else:
+                    addr_data_sort += [addr_data_unsort[ii]]
+                    data_sort      += [data_unsort[ii+1][0:-1] + data_unsort[ii]]
+                    result_sort    += [result_unsort[ii+1][0:-1] + result_unsort[ii]]
 
     print('\nLength of Sorted Data Memory Address   :' + str(len(addr_data_sort)))
     print('Length of Sorted Data Memory           :' + str(len(data_sort)))
@@ -168,7 +169,6 @@ def generate_cm_data_addr(ins_inp, TIMEEXEC):
                         cmdtorun = cmdtorun + ";"
                     cmdtorun = cmdtorun + "s/./&\\n/" + str(x*HY.DATA_WIDTH + (x-1))
                 cmdtorun = cmdtorun + "\' ./mem_files/tile" + str(tile_num) + "_inst.trc" 
-                
                 os.system(cmdtorun)
     ###### step 3: GENERATE CM binaries
     cmdtorun = "cat "
@@ -287,13 +287,29 @@ def generate_dm_data_addr(data_inp, TIMEEXEC):
 
         for dm in dataToWrite:
             if ((dm %2)==0): 
+                bytes_in_curr_row = 0
                 addr_dm_sel = format(dm, addr_dm_sel_format)
                 print("automate.py [INFO]: Writing to DM ", dm, ", Rows ", min(dataVal_Ordered[dm].keys()), " to ", max(dataVal_Ordered[dm].keys()))
                 for i in dataVal_Ordered[dm].keys():
+                    bytes_in_curr_row += 2
+                    
+                    if HY.DM_WIDTH == 64:
+                        i = int (i // 4 )# 64 bits in one row
+                    
                     addr_row_sel = format(i, addr_row_sel_format)
                     addr_byte_sel = format(0, addr_byte_sel_format)
+
+                    if HY.DM_WIDTH == 64:
+                        addr_byte_sel = '' # no need byte selection
+
                     totaladdress = HY.ADDR_MSB_ZEROES + addr_mem_type + HY.ADDR_DM_TOP_ZEROES + addr_dm_sel + HY.ADDR_DM_MID1_ZEROES + addr_row_sel + HY.ADDR_DM_MID2_ZEROES + addr_byte_sel + HY.ADDR_DM_LSB_ZEROES
-                    dm_addr_file.write(totaladdress + "\n")
+
+
+                    if HY.DM_WIDTH == 64 and bytes_in_curr_row == 8 :
+                        # 64 bit in one row
+                        dm_addr_file.write(totaladdress + "\n")
+                    elif HY.DM_WIDTH == 16:
+                        dm_addr_file.write(totaladdress + "\n")
 
                     ValinKey = dataVal_Ordered[dm][i]
 
@@ -304,8 +320,18 @@ def generate_dm_data_addr(data_inp, TIMEEXEC):
 
                     pre_data2file = format(pre_dataMSB,'08b') + format(pre_dataLSB,'08b')
                     post_data2file = format(post_dataMSB,'08b') + format(post_dataLSB,'08b')
-                    dm_data_file.write(pre_data2file + "\n")
-                    results_expected_file.write(post_data2file + "\n")
+
+                    
+                    isNewLine = ""
+                    if HY.DM_WIDTH == 64:
+                        # if reachs 64 bit(4 bytes), we start a new line
+                        if bytes_in_curr_row == 8:
+                            isNewLine = "\n"
+                            bytes_in_curr_row = 0
+                    else:
+                        isNewLine = "\n"
+                    dm_data_file.write(pre_data2file + isNewLine)
+                    results_expected_file.write(post_data2file + isNewLine)
                     if(i==4095):
                         print("automate.py [INFO]: DM details  addr-> ",totaladdress , "MSB ", pre_dataMSB, " LSB ", pre_dataLSB)
     dm_addr_file.close()
