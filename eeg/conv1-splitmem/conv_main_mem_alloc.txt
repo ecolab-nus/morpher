@@ -1,0 +1,7 @@
+var_name,base_addr
+kernel_shared,8192
+conv1_shared,0
+data_shared,8960
+loopstart,16383
+storestart,16383
+loopend,16382
