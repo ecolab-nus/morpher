@@ -19,6 +19,4 @@ RUN apt-get update \
         && cd /home/user/morpher \
         && git submodule update --remote Morpher_CGRA_Mapper \
         && git submodule update --remote Morpher_DFG_Generator \
-        && git submodule update --remote hycube_simulator \
-        && mkdir /home/user/morpher/Morpher_DFG_Generator/benchmarks/morpher_benchmarks/gemm/ \
-        && mv gemm.c /home/user/morpher/Morpher_DFG_Generator/benchmarks/morpher_benchmarks/gemm/
+        && git submodule update --remote hycube_simulator
