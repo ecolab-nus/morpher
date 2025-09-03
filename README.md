@@ -222,3 +222,5 @@ Liang Chen, Tulika Mitra\
 International Conference on Field Programmable Technology, December 2012\
 __Best Paper Award__
 
+
+**Please see the beginning of the Publications section for the works to reference when using this project.**
