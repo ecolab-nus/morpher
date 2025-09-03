@@ -123,7 +123,7 @@ The default precision is int32. To change to 16 bit, uncomment "#define ARCHI_16
 
 ## Publications
 
-If you use Morpher in your work, please cite this paper.
+**If you use Morpher in your work, please cite this paper.**
 
 [ICCAD] [Building an Open CGRA Ecosystem for Agile Innovation](https://arxiv.org/abs/2508.19090)\
 Rohan Juneja, Pranav Dangi, Thilini Kaushalya Bandara, Zhaoying Li, Dhananjaya Wijerathne, Li-Shiuan Peh, Tulika Mitra
@@ -139,7 +139,7 @@ Rohan Juneja, Pranav Dangi, Thilini Kaushalya Bandara, Zhaoying Li, Dhananjaya W
         url={https://arxiv.org/abs/2508.19090}, }
 
 
-Or when working with HyCUBE (now PACE), please reference this paper.
+**Or when working with HyCUBE (now PACE), please reference this paper.**
 
 [HotChips] [PACE: A Scalable and Energy Efficient CGRA in a RISC-V SoC for Edge Computing Applications](https://ieeexplore.ieee.org/abstract/document/10665106)\
 Vishnu P. Nambiar, Yi Sheng Chong, Thilini Kaushalya Bandara, Dhananjaya Wijerathne, Zhaoying Li, Rohan Juneja, Li-Shiuan Peh, Tulika Mitra, Anh Tuan Do
@@ -155,8 +155,8 @@ IEEE Hot Chips Symposium (HCS) 2024
         pages={1-1},
         keywords={Program processors;Energy efficiency;Vectors;Hardware;Flow graphs;Arrays;Kernel},
         doi={10.1109/HCS61935.2024.10665106}}
-            
-        
+
+
 [WOSET] [Morpher: An Open-Source Integrated Compilation and Simulation Framework for CGRA](https://www.comp.nus.edu.sg/~tulika/WOSET_MORPHER_2022.pdf)\
 Dhananjaya Wijerathne, Zhaoying Li, Manupa Karunaratne, Li-Shiuan Peh, Tulika Mitra
 Workshop on Open-Source EDA Technology, International Conference on Computer-Aided Design 2022
