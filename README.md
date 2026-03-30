@@ -122,12 +122,15 @@ The default precision is int32. To change to 16 bit, uncomment "#define ARCHI_16
 
 ## Publications
 
-**If you use Morpher in your work, please cite this paper.**
-
+**If you use Morpher in your work, please cite these papers.**
 [ICCAD] [Building an Open CGRA Ecosystem for Agile Innovation](https://arxiv.org/abs/2508.19090)\
 Rohan Juneja, Pranav Dangi, Thilini Kaushalya Bandara, Zhaoying Li, Dhananjaya Wijerathne, Li-Shiuan Peh, Tulika Mitra\
-(to appear in ICCAD 2025)
-        
+ICCAD 2025
+
+[WOSET] [Morpher: An Open-Source Integrated Compilation and Simulation Framework for CGRA](https://www.comp.nus.edu.sg/~tulika/WOSET_MORPHER_2022.pdf)\
+Dhananjaya Wijerathne, Zhaoying Li, Manupa Karunaratne, Li-Shiuan Peh, Tulika Mitra\
+Workshop on Open-Source EDA Technology, International Conference on Computer-Aided Design 2022
+
         @misc{juneja2025buildingopencgraecosystem,
         title={Building an Open CGRA Ecosystem for Agile Innovation}, 
         author={Rohan Juneja and Pranav Dangi and Thilini Kaushalya Bandara and Zhaoying Li and Dhananjaya Wijerathne and Li-Shiuan Peh and Tulika Mitra},
@@ -154,11 +157,6 @@ IEEE Hot Chips Symposium (HCS) 2024
         pages={1-1},
         keywords={Program processors;Energy efficiency;Vectors;Hardware;Flow graphs;Arrays;Kernel},
         doi={10.1109/HCS61935.2024.10665106}}
-
-
-[WOSET] [Morpher: An Open-Source Integrated Compilation and Simulation Framework for CGRA](https://www.comp.nus.edu.sg/~tulika/WOSET_MORPHER_2022.pdf)\
-Dhananjaya Wijerathne, Zhaoying Li, Manupa Karunaratne, Li-Shiuan Peh, Tulika Mitra\
-Workshop on Open-Source EDA Technology, International Conference on Computer-Aided Design 2022
 
 [DAC] [PANORAMA: Divide-and-Conquer Approach for Mapping Complex Loop Kernels on CGRA](https://www.comp.nus.edu.sg/~tulika/DAC22.pdf)\
 Dhananjaya Wijerathne, Zhaoying Li, Thilini Kaushalya Bandara, Tulika Mitra\
